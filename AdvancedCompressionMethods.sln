@@ -5,6 +5,14 @@ VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods", "AdvancedCompressionMethods\AdvancedCompressionMethods.csproj", "{E12FEFAB-46E2-49E5-86E9-BAF014462102}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.FileOperations", "AdvancedCompressionMethods.FileOperations\AdvancedCompressionMethods.FileOperations.csproj", "{9B0D13C0-1D59-4AB7-AB8B-0DC923EE91B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C5849419-3876-40D2-B1B1-B5DB8A6D23CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.FileOperations.IntegrationTests", "AdvancedCompressionMethods.FileOperations.IntegrationTests\AdvancedCompressionMethods.FileOperations.IntegrationTests.csproj", "{69750931-67A5-4E0A-9DCD-877DB1439E37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.Tests.Common", "AdvancedCompressionMethods.Tests.Common\AdvancedCompressionMethods.Tests.Common.csproj", "{56680906-E620-4AB3-94E5-5FAE18AA4A8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +23,25 @@ Global
 		{E12FEFAB-46E2-49E5-86E9-BAF014462102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E12FEFAB-46E2-49E5-86E9-BAF014462102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E12FEFAB-46E2-49E5-86E9-BAF014462102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B0D13C0-1D59-4AB7-AB8B-0DC923EE91B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B0D13C0-1D59-4AB7-AB8B-0DC923EE91B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B0D13C0-1D59-4AB7-AB8B-0DC923EE91B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B0D13C0-1D59-4AB7-AB8B-0DC923EE91B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69750931-67A5-4E0A-9DCD-877DB1439E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69750931-67A5-4E0A-9DCD-877DB1439E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69750931-67A5-4E0A-9DCD-877DB1439E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69750931-67A5-4E0A-9DCD-877DB1439E37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56680906-E620-4AB3-94E5-5FAE18AA4A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56680906-E620-4AB3-94E5-5FAE18AA4A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56680906-E620-4AB3-94E5-5FAE18AA4A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56680906-E620-4AB3-94E5-5FAE18AA4A8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69750931-67A5-4E0A-9DCD-877DB1439E37} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
+		{56680906-E620-4AB3-94E5-5FAE18AA4A8B} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F35C4849-5000-42C4-BB15-34507BF7A5E4}

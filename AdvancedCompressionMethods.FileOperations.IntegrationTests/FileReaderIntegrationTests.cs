@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using AdvancedCompressionMethods.FileOperations.Interfaces;
+using AdvancedCompressionMethods.FileOperations.Validators;
 using AdvancedCompressionMethods.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +23,7 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
 
             TestMethods.CreateFileWithGivenBytes(filePath, Constants.TestBytes);
 
-            fileReader = new FileReader(buffer);
+            fileReader = new FileReader(buffer, new FilepathValidator());
             fileReader.Open(filePath);
         }
 

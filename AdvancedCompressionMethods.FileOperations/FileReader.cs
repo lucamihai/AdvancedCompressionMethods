@@ -2,14 +2,14 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using AdvancedCompressionMethods.FileOperations.Interfaces;
-using AdvancedCompressionMethods.FileOperations.Validators;
+using AdvancedCompressionMethods.FileOperations.Interfaces.Validators;
 
 namespace AdvancedCompressionMethods.FileOperations
 {
     public class FileReader : IFileReader, IDisposable
     {
         private readonly IBuffer buffer;
-        private static readonly FilepathValidator FilepathValidator = new FilepathValidator();
+        private readonly IFilepathValidator filepathValidator;
 
         private FileStream fileStream;
 
@@ -17,17 +17,17 @@ namespace AdvancedCompressionMethods.FileOperations
         public bool ReachedEndOfFile { get; private set; }
         public long BitsLeft { get; private set; }
 
-
-        public FileReader(IBuffer buffer)
+        public FileReader(IBuffer buffer, IFilepathValidator filepathValidator)
         {
             this.buffer = buffer;
+            this.filepathValidator = filepathValidator;
+
             this.buffer.OnCurrentBitReset += OnCurrentBitReset;
-            
         }
 
         public void Open(string filepath)
         {
-            FilepathValidator.ValidateAndThrow(filepath, checkIfExists: true);
+            filepathValidator.ValidateAndThrow(filepath, checkIfExists: true);
 
             Close();
 

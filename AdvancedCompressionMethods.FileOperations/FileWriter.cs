@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using AdvancedCompressionMethods.FileOperations.Interfaces;
-using AdvancedCompressionMethods.FileOperations.Validators;
+using AdvancedCompressionMethods.FileOperations.Interfaces.Validators;
 
 namespace AdvancedCompressionMethods.FileOperations
 {
@@ -10,23 +10,24 @@ namespace AdvancedCompressionMethods.FileOperations
     {
         private const uint EightBitMask = byte.MaxValue;
 
-        private static readonly FilepathValidator FilepathValidator = new FilepathValidator();
-
         private readonly IBuffer buffer;
+        private readonly IFilepathValidator filepathValidator;
+
         private FileStream fileStream;
 
         public string FilePath { get; private set; }
-        
 
-        public FileWriter(IBuffer buffer)
+        public FileWriter(IBuffer buffer, IFilepathValidator filepathValidator)
         {
             this.buffer = buffer;
+            this.filepathValidator = filepathValidator;
+
             this.buffer.OnCurrentBitReset += OnCurrentBitReset;
         }
 
         public void Open(string filepath)
         {
-            FilepathValidator.ValidateAndThrow(filepath, checkIfExists: false);
+            filepathValidator.ValidateAndThrow(filepath, checkIfExists: false);
 
             FilePath = filepath;
             fileStream = new FileStream(filepath, FileMode.OpenOrCreate);

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using AdvancedCompressionMethods.FileOperations.Validators;
 using AdvancedCompressionMethods.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,8 +22,8 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
         [TestInitialize]
         public void Setup()
         {
-            fileReader = new FileReader(new Buffer());
-            fileWriter = new FileWriter(new Buffer());
+            fileReader = new FileReader(new Buffer(), new FilepathValidator());
+            fileWriter = new FileWriter(new Buffer(), new FilepathValidator());
 
             filePathSource = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImage}";
             filePathDestination = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImageDestination}";

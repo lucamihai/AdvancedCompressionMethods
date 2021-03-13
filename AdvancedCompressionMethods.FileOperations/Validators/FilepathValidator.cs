@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using AdvancedCompressionMethods.FileOperations.Interfaces.Validators;
 
 namespace AdvancedCompressionMethods.FileOperations.Validators
 {
-    public class FilepathValidator
+    public class FilepathValidator : IFilepathValidator
     {
         public void ValidateAndThrow(string filePath, bool checkIfExists = true)
         {

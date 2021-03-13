@@ -12,6 +12,8 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
     //[Ignore]
     public class FileReaderAndFileWriterIntegrationTests
     {
+        private FileReader fileReader;
+        private FileWriter fileWriter;
         private string filePathSource;
         private string filePathDestination;
         private long originalFileSizeInBytes;
@@ -19,39 +21,39 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
         [TestInitialize]
         public void Setup()
         {
+            fileReader = new FileReader(new Buffer());
+            fileWriter = new FileWriter(new Buffer());
+
             filePathSource = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImage}";
             filePathDestination = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImageDestination}";
 
             TestMethods.CopyFileAndReplaceIfAlreadyExists($"{Environment.CurrentDirectory}\\Resources\\{Constants.TestFileNameImage}", filePathSource);
 
             originalFileSizeInBytes = new FileInfo(filePathSource).Length;
+
+            fileReader.Open(filePathSource);
+            fileWriter.Open(filePathDestination);
         }
 
         [TestMethod]
         public void TestThatFileIsCopiedCorrectlyForNumberOfBitsBetween1And8()
         {
             var random = new Random();
-            var stopWatch = new Stopwatch();
+            var stopWatch = Stopwatch.StartNew();
 
-            using (var fileReader = new FileReader(filePathSource, new Buffer()))
+            while (!fileReader.ReachedEndOfFile)
             {
-                using (var fileWriter = new FileWriter(filePathDestination, new Buffer()))
-                {
-                    stopWatch.Start();
+                var numberOfBits = fileReader.BitsLeft < 8
+                    ? (byte)fileReader.BitsLeft
+                    : (byte)random.Next(1, 8);
 
-                    while (!fileReader.ReachedEndOfFile)
-                    {
-                        var numberOfBits = fileReader.BitsLeft < 8
-                            ? (byte)fileReader.BitsLeft
-                            : (byte)random.Next(1, 8);
-
-                        var readStuff = fileReader.ReadBits(numberOfBits);
-                        fileWriter.WriteValueOnBits(readStuff, numberOfBits);
-                    }
-
-                    stopWatch.Stop();
-                }
+                var readStuff = fileReader.ReadBits(numberOfBits);
+                fileWriter.WriteValueOnBits(readStuff, numberOfBits);
             }
+            
+            stopWatch.Stop();
+            fileReader.Close();
+            fileWriter.Close();
 
             Console.WriteLine($"File copying in '{TestMethods.GetCurrentMethodName()}' took {stopWatch.ElapsedMilliseconds} ms for {originalFileSizeInBytes} bytes");
 
@@ -62,28 +64,22 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
         public void TestThatFileIsCopiedCorrectlyForNumberOfBitsBetween8And32()
         {
             var random = new Random();
-            var stopWatch = new Stopwatch();
+            var stopWatch = Stopwatch.StartNew();
 
-            using (var fileReader = new FileReader(filePathSource, new Buffer()))
+            while (!fileReader.ReachedEndOfFile)
             {
-                using (var fileWriter = new FileWriter(filePathDestination, new Buffer()))
-                {
-                    stopWatch.Start();
+                var numberOfBits = fileReader.BitsLeft < 32
+                    ? (byte)fileReader.BitsLeft
+                    : (byte)random.Next(8, 32);
 
-                    while (!fileReader.ReachedEndOfFile)
-                    {
-                        var numberOfBits = fileReader.BitsLeft < 32
-                            ? (byte)fileReader.BitsLeft
-                            : (byte)random.Next(8, 32);
+                var readStuff = fileReader.ReadBits(numberOfBits);
 
-                        var readStuff = fileReader.ReadBits(numberOfBits);
-
-                        fileWriter.WriteValueOnBits(readStuff, numberOfBits);
-                    }
-                }
+                fileWriter.WriteValueOnBits(readStuff, numberOfBits);
             }
-
+            
             stopWatch.Stop();
+            fileReader.Close();
+            fileWriter.Close();
 
             Console.WriteLine($"File copying in '{TestMethods.GetCurrentMethodName()}' took {stopWatch.ElapsedMilliseconds} ms for {originalFileSizeInBytes} bytes");
 
@@ -93,6 +89,9 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
         [TestCleanup]
         public void Cleanup()
         {
+            fileReader.Close();
+            fileWriter.Close();
+
             TestMethods.DeleteFileIfExists(filePathSource);
             TestMethods.DeleteFileIfExists(filePathDestination);
         }

@@ -21,7 +21,8 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
             filePath = $"{Environment.CurrentDirectory}\\{Constants.TestFileName}";
             buffer = new Buffer();
 
-            fileWriter = new FileWriter(filePath, buffer);
+            fileWriter = new FileWriter(buffer);
+            fileWriter.Open(filePath);
         }
 
         [TestCleanup]

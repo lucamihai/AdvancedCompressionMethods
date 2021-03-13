@@ -22,7 +22,8 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
 
             TestMethods.CreateFileWithGivenBytes(filePath, Constants.TestBytes);
 
-            fileReader = new FileReader(filePath, buffer);
+            fileReader = new FileReader(buffer);
+            fileReader.Open(filePath);
         }
 
         [TestMethod]

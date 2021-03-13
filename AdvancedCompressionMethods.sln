@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods", "AdvancedCompressionMethods\AdvancedCompressionMethods.csproj", "{E12FEFAB-46E2-49E5-86E9-BAF014462102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods", "AdvancedCompressionMethods\AdvancedCompressionMethods.csproj", "{E12FEFAB-46E2-49E5-86E9-BAF014462102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.FileOperations", "AdvancedCompressionMethods.FileOperations\AdvancedCompressionMethods.FileOperations.csproj", "{9B0D13C0-1D59-4AB7-AB8B-0DC923EE91B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.FileOperations", "AdvancedCompressionMethods.FileOperations\AdvancedCompressionMethods.FileOperations.csproj", "{9B0D13C0-1D59-4AB7-AB8B-0DC923EE91B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C5849419-3876-40D2-B1B1-B5DB8A6D23CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.FileOperations.IntegrationTests", "AdvancedCompressionMethods.FileOperations.IntegrationTests\AdvancedCompressionMethods.FileOperations.IntegrationTests.csproj", "{69750931-67A5-4E0A-9DCD-877DB1439E37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.FileOperations.IntegrationTests", "AdvancedCompressionMethods.FileOperations.IntegrationTests\AdvancedCompressionMethods.FileOperations.IntegrationTests.csproj", "{69750931-67A5-4E0A-9DCD-877DB1439E37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.Tests.Common", "AdvancedCompressionMethods.Tests.Common\AdvancedCompressionMethods.Tests.Common.csproj", "{56680906-E620-4AB3-94E5-5FAE18AA4A8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.Tests.Common", "AdvancedCompressionMethods.Tests.Common\AdvancedCompressionMethods.Tests.Common.csproj", "{56680906-E620-4AB3-94E5-5FAE18AA4A8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.ArithmeticCoding", "AdvancedCompressionMethods.ArithmeticCoding\AdvancedCompressionMethods.ArithmeticCoding.csproj", "{F5346B13-34E3-4408-8561-B31D90F90D8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{56680906-E620-4AB3-94E5-5FAE18AA4A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56680906-E620-4AB3-94E5-5FAE18AA4A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56680906-E620-4AB3-94E5-5FAE18AA4A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5346B13-34E3-4408-8561-B31D90F90D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5346B13-34E3-4408-8561-B31D90F90D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5346B13-34E3-4408-8561-B31D90F90D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5346B13-34E3-4408-8561-B31D90F90D8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

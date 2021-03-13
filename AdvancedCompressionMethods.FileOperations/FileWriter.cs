@@ -11,30 +11,36 @@ namespace AdvancedCompressionMethods.FileOperations
         private const uint EightBitMask = byte.MaxValue;
 
         private static readonly FilepathValidator FilepathValidator = new FilepathValidator();
-        private static readonly BufferValidator BufferValidator = new BufferValidator();
 
-        private readonly FileStream fileStream;
+        private readonly IBuffer buffer;
+        private FileStream fileStream;
 
-        public string FilePath { get; }
-        public IBuffer Buffer { get; }
+        public string FilePath { get; private set; }
+        
 
-        public FileWriter(string filePath, IBuffer buffer)
+        public FileWriter(IBuffer buffer)
         {
-            FilepathValidator.ValidateAndThrow(filePath, false);
-            BufferValidator.ValidateAndThrow(buffer);
+            this.buffer = buffer;
+            this.buffer.OnCurrentBitReset += OnCurrentBitReset;
+        }
 
-            fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
+        public void Open(string filepath)
+        {
+            FilepathValidator.ValidateAndThrow(filepath, checkIfExists: false);
 
-            FilePath = filePath;
-            Buffer = buffer;
+            FilePath = filepath;
+            fileStream = new FileStream(filepath, FileMode.OpenOrCreate);
+        }
 
-            Buffer.OnCurrentBitReset += OnCurrentBitReset;
+        public void Close()
+        {
+            fileStream?.Close();
         }
 
         public void WriteBit(bool bitValue)
         {
             var valueToWrite = bitValue ? (byte)1 : (byte)0;
-            Buffer.AddValueStartingFromCurrentBit(valueToWrite, 1);
+            buffer.AddValueStartingFromCurrentBit(valueToWrite, 1);
         }
 
         public void WriteValueOnBits(uint value, byte numberOfBits)
@@ -54,7 +60,7 @@ namespace AdvancedCompressionMethods.FileOperations
                     ? (byte)(value & EightBitMask)
                     : (byte)value;
 
-                Buffer.AddValueStartingFromCurrentBit(byteToWrite, numberOfBitsToWrite);
+                buffer.AddValueStartingFromCurrentBit(byteToWrite, numberOfBitsToWrite);
 
                 value >>= numberOfBitsToWrite;
                 numberOfBits -= numberOfBitsToWrite;
@@ -63,16 +69,16 @@ namespace AdvancedCompressionMethods.FileOperations
 
         public void Flush()
         {
-            Buffer.Flush();
+            buffer.Flush();
         }
 
         [ExcludeFromCodeCoverage]
         private void OnCurrentBitReset(byte valueFromBuffer)
         {
-            fileStream.WriteByte(Buffer.Value);
+            fileStream.WriteByte(buffer.Value);
             fileStream.Flush();
 
-            Buffer.Value = 0;
+            buffer.Value = 0;
         }
 
         #region IDisposable stuff

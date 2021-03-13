@@ -8,41 +8,37 @@ namespace AdvancedCompressionMethods.FileOperations
 {
     public class FileReader : IFileReader, IDisposable
     {
+        private readonly IBuffer buffer;
         private static readonly FilepathValidator FilepathValidator = new FilepathValidator();
-        private static readonly BufferValidator BufferValidator = new BufferValidator();
 
         private FileStream fileStream;
 
+        public string FilePath { get; private set; }
         public bool ReachedEndOfFile { get; private set; }
         public long BitsLeft { get; private set; }
 
-        public string FilePath { get; }
-        public IBuffer Buffer { get; private set; }
 
-        public FileReader(string filePath, IBuffer buffer)
+        public FileReader(IBuffer buffer)
         {
-            FilepathValidator.ValidateAndThrow(filePath);
-            BufferValidator.ValidateAndThrow(buffer);
-
-            FilePath = filePath;
-            Buffer = buffer;
-
-            fileStream = new FileStream(filePath, FileMode.Open);
-            BitsLeft = fileStream.Length * 8;
-
-            Buffer.OnCurrentBitReset += OnCurrentBitReset;
-            Buffer.Value = (byte)fileStream.ReadByte();
+            this.buffer = buffer;
+            this.buffer.OnCurrentBitReset += OnCurrentBitReset;
+            
         }
 
-        public void Open()
+        public void Open(string filepath)
         {
+            FilepathValidator.ValidateAndThrow(filepath, checkIfExists: true);
+
+            Close();
+
+            FilePath = filepath;
             fileStream = new FileStream(FilePath, FileMode.Open);
             Reset();
         }
 
         public void Close()
         {
-            fileStream.Dispose();
+            fileStream?.Close();
         }
 
         public void Reset()
@@ -50,16 +46,14 @@ namespace AdvancedCompressionMethods.FileOperations
             fileStream.Position = 0;
             BitsLeft = fileStream.Length * 8;
             ReachedEndOfFile = false;
-
-            Buffer = new Buffer();
-            Buffer.OnCurrentBitReset += OnCurrentBitReset;
-            Buffer.Value = (byte)fileStream.ReadByte();
+            
+            buffer.Value = (byte)fileStream.ReadByte();
         }
 
         public bool ReadBit()
         {
             BitsLeft -= 1;
-            return Buffer.GetValueStartingFromCurrentBit(1) == 1;
+            return buffer.GetValueStartingFromCurrentBit(1) == 1;
         }
 
         public uint ReadBits(byte numberOfBits)
@@ -73,7 +67,7 @@ namespace AdvancedCompressionMethods.FileOperations
 
             if (numberOfBits <= 8)
             {
-                return Buffer.GetValueStartingFromCurrentBit(numberOfBits);
+                return buffer.GetValueStartingFromCurrentBit(numberOfBits);
             }
 
             var numberOfBitsRead = 0;
@@ -85,7 +79,7 @@ namespace AdvancedCompressionMethods.FileOperations
                     ? (byte)8
                     : numberOfBits;
 
-                valueToReturn += (uint)Buffer.GetValueStartingFromCurrentBit(numberOfBitsToRead) << numberOfBitsRead;
+                valueToReturn += (uint)buffer.GetValueStartingFromCurrentBit(numberOfBitsToRead) << numberOfBitsRead;
                 numberOfBits -= numberOfBitsToRead;
                 numberOfBitsRead += numberOfBitsToRead;
             }
@@ -104,11 +98,11 @@ namespace AdvancedCompressionMethods.FileOperations
             if (fileStream.Position == fileStream.Length)
             {
                 ReachedEndOfFile = true;
-                Buffer.AddValueStartingFromCurrentBit(127, 7);
+                buffer.AddValueStartingFromCurrentBit(127, 7);
                 return;
             }
 
-            Buffer.Value = (byte)fileStream.ReadByte();
+            buffer.Value = (byte)fileStream.ReadByte();
         }
 
         #region IDisbosable stuff

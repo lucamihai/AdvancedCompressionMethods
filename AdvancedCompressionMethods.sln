@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.DI", "AdvancedCompressionMethods.DI\AdvancedCompressionMethods.DI.csproj", "{3E2372A7-5378-4C33-B36A-0CD6D090F8C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests", "AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests\AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests.csproj", "{33ED352F-736F-4FA2-A9AF-8F228DAF5051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests", "AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests\AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests.csproj", "{33ED352F-736F-4FA2-A9AF-8F228DAF5051}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{B2D642F1-EBCC-42C3-AAED-E5454A082846}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.FileOperations.Benchmark", "AdvancedCompressionMethods.FileOperations.Benchmark\AdvancedCompressionMethods.FileOperations.Benchmark.csproj", "{504640E0-96B3-47F7-ACA2-F932A317692A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,10 @@ Global
 		{33ED352F-736F-4FA2-A9AF-8F228DAF5051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33ED352F-736F-4FA2-A9AF-8F228DAF5051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33ED352F-736F-4FA2-A9AF-8F228DAF5051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{504640E0-96B3-47F7-ACA2-F932A317692A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{504640E0-96B3-47F7-ACA2-F932A317692A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{504640E0-96B3-47F7-ACA2-F932A317692A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{504640E0-96B3-47F7-ACA2-F932A317692A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +69,7 @@ Global
 		{69750931-67A5-4E0A-9DCD-877DB1439E37} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
 		{56680906-E620-4AB3-94E5-5FAE18AA4A8B} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
 		{33ED352F-736F-4FA2-A9AF-8F228DAF5051} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
+		{504640E0-96B3-47F7-ACA2-F932A317692A} = {B2D642F1-EBCC-42C3-AAED-E5454A082846}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F35C4849-5000-42C4-BB15-34507BF7A5E4}

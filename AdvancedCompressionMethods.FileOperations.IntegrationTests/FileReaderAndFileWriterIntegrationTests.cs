@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using AdvancedCompressionMethods.DI;
 using AdvancedCompressionMethods.FileOperations.Interfaces;
 using AdvancedCompressionMethods.Tests.Common;
@@ -12,14 +10,12 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    //[Ignore]
     public class FileReaderAndFileWriterIntegrationTests
     {
         private IFileReader fileReader;
         private IFileWriter fileWriter;
-        private string filePathSource;
-        private string filePathDestination;
-        private long originalFileSizeInBytes;
+        private string filepathSource;
+        private string filepathDestination;
 
         [TestInitialize]
         public void Setup()
@@ -28,22 +24,21 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
             fileReader = serviceProvider.GetRequiredService<IFileReader>();
             fileWriter = serviceProvider.GetRequiredService<IFileWriter>();
 
-            filePathSource = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImage}";
-            filePathDestination = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImageDestination}";
-
-            TestMethods.CopyFileAndReplaceIfAlreadyExists($"{Environment.CurrentDirectory}\\Resources\\{Constants.TestFileNameImage}", filePathSource);
-
-            originalFileSizeInBytes = new FileInfo(filePathSource).Length;
-
-            fileReader.Open(filePathSource);
-            fileWriter.Open(filePathDestination);
+            filepathSource = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImage}";
+            filepathDestination = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImageDestination}";
         }
 
         [TestMethod]
-        public void TestThatFileIsCopiedCorrectlyForNumberOfBitsBetween1And8()
+        [DataRow(TestFileContents.FileTextContents1, DisplayName = "FileTextContents1")]
+        [DataRow(TestFileContents.FileTextContents2, DisplayName = "FileTextContents2")]
+        [DataRow(TestFileContents.FileTextContents3, DisplayName = "FileTextContents3")]
+        public void TestThatFileIsCopiedCorrectlyForNumberOfBitsBetween1And8(string fileTextContents)
         {
+            TestMethods.CreateFileWithTextContents(filepathSource, fileTextContents);
             var random = new Random();
-            var stopWatch = Stopwatch.StartNew();
+
+            fileReader.Open(filepathSource);
+            fileWriter.Open(filepathDestination);
 
             while (!fileReader.ReachedEndOfFile)
             {
@@ -55,20 +50,23 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
                 fileWriter.WriteValueOnBits(readStuff, numberOfBits);
             }
             
-            stopWatch.Stop();
             fileReader.Close();
             fileWriter.Close();
 
-            Console.WriteLine($"File copying in '{TestMethods.GetCurrentMethodName()}' took {stopWatch.ElapsedMilliseconds} ms for {originalFileSizeInBytes} bytes");
-
-            Assert.IsTrue(TestMethods.FilesHaveTheSameContent(filePathSource, filePathDestination));
+            Assert.IsTrue(TestMethods.FilesHaveTheSameContent(filepathSource, filepathDestination));
         }
 
         [TestMethod]
-        public void TestThatFileIsCopiedCorrectlyForNumberOfBitsBetween8And32()
+        [DataRow(TestFileContents.FileTextContents1, DisplayName = "FileTextContents1")]
+        [DataRow(TestFileContents.FileTextContents2, DisplayName = "FileTextContents2")]
+        [DataRow(TestFileContents.FileTextContents3, DisplayName = "FileTextContents3")]
+        public void TestThatFileIsCopiedCorrectlyForNumberOfBitsBetween8And32(string fileTextContents)
         {
+            TestMethods.CreateFileWithTextContents(filepathSource, fileTextContents);
             var random = new Random();
-            var stopWatch = Stopwatch.StartNew();
+
+            fileReader.Open(filepathSource);
+            fileWriter.Open(filepathDestination);
 
             while (!fileReader.ReachedEndOfFile)
             {
@@ -77,27 +75,20 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
                     : (byte)random.Next(8, 32);
 
                 var readStuff = fileReader.ReadBits(numberOfBits);
-
                 fileWriter.WriteValueOnBits(readStuff, numberOfBits);
             }
             
-            stopWatch.Stop();
             fileReader.Close();
             fileWriter.Close();
-
-            Console.WriteLine($"File copying in '{TestMethods.GetCurrentMethodName()}' took {stopWatch.ElapsedMilliseconds} ms for {originalFileSizeInBytes} bytes");
-
-            Assert.IsTrue(TestMethods.FilesHaveTheSameContent(filePathSource, filePathDestination));
+            
+            Assert.IsTrue(TestMethods.FilesHaveTheSameContent(filepathSource, filepathDestination));
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            fileReader.Close();
-            fileWriter.Close();
-
-            TestMethods.DeleteFileIfExists(filePathSource);
-            TestMethods.DeleteFileIfExists(filePathDestination);
+            TestMethods.DeleteFileIfExists(filepathSource);
+            TestMethods.DeleteFileIfExists(filepathDestination);
         }
     }
 }

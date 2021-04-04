@@ -19,16 +19,10 @@ namespace AdvancedCompressionMethods.ArithmeticCoding
             fileReader.Open(sourceFilepath);
             fileWriter.Open(destinationFilepath);
 
-            while (!fileReader.ReachedEndOfFile)
-            {
-                var cv = fileReader.ReadBits(8);
-                fileWriter.WriteValueOnBits(cv, 8);
-            }
-
             fileReader.Close();
             fileWriter.Close();
 
-            //throw new System.NotImplementedException();
+            throw new System.NotImplementedException();
         }
     }
 }

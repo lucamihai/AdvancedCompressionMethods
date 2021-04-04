@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using AdvancedCompressionMethods.FileOperations.Interfaces;
 
 namespace AdvancedCompressionMethods.FileOperations
 {
     public class Buffer : IBuffer
     {
-        private BitArray bitArray;
-        private byte[] temp = new byte[1];
+        private readonly BitArray bitArray;
+        private static readonly byte[] ByteValues = new byte[] {1, 2, 4, 8, 16, 32, 64, 128};
 
         public byte Value
         {
             get => GetByteFromBitArray(bitArray);
-            set => bitArray = new BitArray(new[] { value });
+            set
+            {
+                for (var i = 0; i < 8; i++)
+                {
+                    bitArray[i] = (value & ByteValues[i]) == ByteValues[i];
+                }
+            }
         }
 
         private byte previousCurrentBit;
@@ -44,32 +49,27 @@ namespace AdvancedCompressionMethods.FileOperations
 
         public void AddValueStartingFromCurrentBit(byte value, byte numberOfBitsToWrite)
         {
-            var valueBitArray = new BitArray(new byte[] {value});
-            //temp[0] = value;
-            //var valueBitArray = new BitArray(temp);
-            valueBitArray.Length = numberOfBitsToWrite;
-
-            for (int index = 0; index < numberOfBitsToWrite; index++)
+            for (var i = 0; i < numberOfBitsToWrite; i++)
             {
-                bitArray[CurrentBit] = index < bitArray.Length && valueBitArray[index];
+                bitArray[CurrentBit] = (value & ByteValues[i]) == ByteValues[i];
                 CurrentBit++;
             }
         }
 
         public byte GetValueStartingFromCurrentBit(byte numberOfBitsToRead)
         {
-            var valueBitArray = new BitArray(8);
-            valueBitArray.SetAll(false);
+            byte value = 0;
 
-            for (int i = 0; i < numberOfBitsToRead; i++)
+            for (var i = 0; i < numberOfBitsToRead; i++)
             {
-                var valueBitArrayIndex = i % 8;
-                valueBitArray[valueBitArrayIndex] = bitArray[CurrentBit];
+                value += bitArray[CurrentBit]
+                    ? ByteValues[i]
+                    : (byte)0;
 
                 CurrentBit++;
             }
 
-            return GetByteFromBitArray(valueBitArray);
+            return value;
         }
 
         public void Flush()
@@ -79,9 +79,16 @@ namespace AdvancedCompressionMethods.FileOperations
 
         private static byte GetByteFromBitArray(BitArray bitArray)
         {
-            var bytes = new byte[1];
-            bitArray.CopyTo(bytes, 0);
-            return bytes[0];
+            byte value = 0;
+
+            for (var i = 0; i < 8; i++)
+            {
+                value += bitArray[i]
+                    ? ByteValues[i]
+                    : (byte)0;
+            }
+
+            return value;
         }
     }
 }

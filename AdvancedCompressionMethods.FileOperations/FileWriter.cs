@@ -21,13 +21,14 @@ namespace AdvancedCompressionMethods.FileOperations
         {
             this.buffer = buffer;
             this.filepathValidator = filepathValidator;
-
-            this.buffer.OnCurrentBitReset += OnCurrentBitReset;
         }
 
         public void Open(string filepath)
         {
             filepathValidator.ValidateAndThrow(filepath, checkIfExists: false);
+            
+            buffer.OnCurrentBitReset = null;
+            buffer.OnCurrentBitReset += OnCurrentBitReset;
 
             FilePath = filepath;
             fileStream = new FileStream(filepath, FileMode.OpenOrCreate);

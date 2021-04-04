@@ -14,19 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\AdvancedCompressionMethods.ArithmeticCoding\AdvancedCompressionMethods.ArithmeticCoding.csproj" />
     <ProjectReference Include="..\AdvancedCompressionMethods.DI\AdvancedCompressionMethods.DI.csproj" />
-    <ProjectReference Include="..\AdvancedCompressionMethods.FileOperations\AdvancedCompressionMethods.FileOperations.csproj" />
     <ProjectReference Include="..\AdvancedCompressionMethods.Tests.Common\AdvancedCompressionMethods.Tests.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Resources\testImage.PNG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

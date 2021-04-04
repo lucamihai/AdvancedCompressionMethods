@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using AdvancedCompressionMethods.FileOperations.Validators;
+using AdvancedCompressionMethods.DI;
+using AdvancedCompressionMethods.FileOperations.Interfaces;
 using AdvancedCompressionMethods.Tests.Common;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
@@ -13,8 +15,8 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
     //[Ignore]
     public class FileReaderAndFileWriterIntegrationTests
     {
-        private FileReader fileReader;
-        private FileWriter fileWriter;
+        private IFileReader fileReader;
+        private IFileWriter fileWriter;
         private string filePathSource;
         private string filePathDestination;
         private long originalFileSizeInBytes;
@@ -22,8 +24,9 @@ namespace AdvancedCompressionMethods.FileOperations.IntegrationTests
         [TestInitialize]
         public void Setup()
         {
-            fileReader = new FileReader(new Buffer(), new FilepathValidator());
-            fileWriter = new FileWriter(new Buffer(), new FilepathValidator());
+            var serviceProvider = DependencyResolver.GetServices().BuildServiceProvider();
+            fileReader = serviceProvider.GetRequiredService<IFileReader>();
+            fileWriter = serviceProvider.GetRequiredService<IFileWriter>();
 
             filePathSource = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImage}";
             filePathDestination = $"{Environment.CurrentDirectory}\\{Constants.TestFileNameImageDestination}";

@@ -34,7 +34,7 @@ namespace AdvancedCompressionMethods.FileOperations
         }
 
         public delegate void CurrentBitReset(byte valueFromBuffer);
-        public CurrentBitReset OnCurrentBitReset { get; set; } = valueFromBuffer => { };
+        public CurrentBitReset OnCurrentBitReset { get; set; }
 
         public Buffer()
         {
@@ -44,11 +44,6 @@ namespace AdvancedCompressionMethods.FileOperations
 
         public void AddValueStartingFromCurrentBit(byte value, byte numberOfBitsToWrite)
         {
-            if (numberOfBitsToWrite == 0)
-            {
-                throw new ArgumentException();
-            }
-
             var valueBitArray = new BitArray(new byte[] {value});
             //temp[0] = value;
             //var valueBitArray = new BitArray(temp);
@@ -63,11 +58,6 @@ namespace AdvancedCompressionMethods.FileOperations
 
         public byte GetValueStartingFromCurrentBit(byte numberOfBitsToRead)
         {
-            if (numberOfBitsToRead == 0)
-            {
-                throw new ArgumentException();
-            }
-
             var valueBitArray = new BitArray(8);
             valueBitArray.SetAll(false);
 

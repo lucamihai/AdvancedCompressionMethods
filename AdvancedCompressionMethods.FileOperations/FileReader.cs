@@ -21,8 +21,6 @@ namespace AdvancedCompressionMethods.FileOperations
         {
             this.buffer = buffer;
             this.filepathValidator = filepathValidator;
-
-            this.buffer.OnCurrentBitReset += OnCurrentBitReset;
         }
 
         public void Open(string filepath)
@@ -43,6 +41,9 @@ namespace AdvancedCompressionMethods.FileOperations
 
         public void Reset()
         {
+            buffer.OnCurrentBitReset = null;
+            buffer.OnCurrentBitReset += OnCurrentBitReset;
+
             fileStream.Position = 0;
             BitsLeft = fileStream.Length * 8;
             ReachedEndOfFile = false;
@@ -53,16 +54,12 @@ namespace AdvancedCompressionMethods.FileOperations
         public bool ReadBit()
         {
             BitsLeft -= 1;
+
             return buffer.GetValueStartingFromCurrentBit(1) == 1;
         }
 
         public uint ReadBits(byte numberOfBits)
         {
-            if (numberOfBits == 0)
-            {
-                throw new ArgumentException();
-            }
-
             BitsLeft -= numberOfBits;
 
             if (numberOfBits <= 8)

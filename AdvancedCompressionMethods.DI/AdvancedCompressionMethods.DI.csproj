@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AdvancedCompressionMethods.ArithmeticCoding\AdvancedCompressionMethods.ArithmeticCoding.csproj" />
     <ProjectReference Include="..\AdvancedCompressionMethods.FileOperations\AdvancedCompressionMethods.FileOperations.csproj" />
+    <ProjectReference Include="..\AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj" />
   </ItemGroup>
 
 </Project>

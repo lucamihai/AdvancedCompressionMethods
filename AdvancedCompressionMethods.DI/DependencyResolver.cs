@@ -5,6 +5,8 @@ using AdvancedCompressionMethods.FileOperations;
 using AdvancedCompressionMethods.FileOperations.Interfaces;
 using AdvancedCompressionMethods.FileOperations.Interfaces.Validators;
 using AdvancedCompressionMethods.FileOperations.Validators;
+using AdvancedCompressionMethods.NearLosslessPredictiveCoding;
+using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AdvancedCompressionMethods.DI
@@ -23,6 +25,9 @@ namespace AdvancedCompressionMethods.DI
 
             services.AddScoped<IArithmeticEncoder, ArithmeticEncoder>();
             services.AddScoped<IArithmeticDecoder, ArithmeticDecoder>();
+
+            services.AddScoped<INearLosslessPredictiveEncoder, NearLosslessPredictiveEncoder>();
+            services.AddScoped<INearLosslessPredictiveDecoder, NearLosslessPredictiveDecoder>();
 
             return services;
         }

@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding", "AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj", "{60359E4D-9655-4E59-A883-B27F80882178}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests", "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests.csproj", "{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{60359E4D-9655-4E59-A883-B27F80882178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60359E4D-9655-4E59-A883-B27F80882178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60359E4D-9655-4E59-A883-B27F80882178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{56680906-E620-4AB3-94E5-5FAE18AA4A8B} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
 		{33ED352F-736F-4FA2-A9AF-8F228DAF5051} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
 		{504640E0-96B3-47F7-ACA2-F932A317692A} = {B2D642F1-EBCC-42C3-AAED-E5454A082846}
+		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F35C4849-5000-42C4-BB15-34507BF7A5E4}

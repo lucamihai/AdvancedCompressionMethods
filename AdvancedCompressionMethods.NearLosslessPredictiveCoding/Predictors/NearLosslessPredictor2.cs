@@ -2,7 +2,7 @@
 
 namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Predictors
 {
-    public class NearLosslessPredictor2 : INearLosslessPredictor
+    internal class NearLosslessPredictor2 : INearLosslessPredictor
     {
         public byte PredictValue(params byte[] values)
         {

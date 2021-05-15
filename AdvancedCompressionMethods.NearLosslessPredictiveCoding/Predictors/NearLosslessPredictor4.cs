@@ -3,7 +3,7 @@ using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces;
 
 namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Predictors
 {
-    public class NearLosslessPredictor4 : INearLosslessPredictor
+    internal class NearLosslessPredictor4 : INearLosslessPredictor
     {
         public byte PredictValue(params byte[] values)
         {

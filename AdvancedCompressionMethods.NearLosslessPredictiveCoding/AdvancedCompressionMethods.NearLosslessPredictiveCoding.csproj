@@ -8,4 +8,8 @@
     <ProjectReference Include="..\AdvancedCompressionMethods.FileOperations\AdvancedCompressionMethods.FileOperations.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
 </Project>

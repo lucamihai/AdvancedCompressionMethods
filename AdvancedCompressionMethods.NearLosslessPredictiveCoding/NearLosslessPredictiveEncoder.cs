@@ -29,7 +29,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
             fileWriter.Open(destinationFilepath);
 
             CopyBitmapHeader();
-            WriteUsedImagePredictor(nearLosslessOptions);
+            WriteOptions(nearLosslessOptions);
             var errorMatrixWriter = NearLosslessErrorMatrixWriterSelector.GetErrorMatrixWriter(nearLosslessOptions.SaveMode);
             errorMatrixWriter.WriteErrorMatrix(imageMatrices.QuantizedErrors, fileWriter);
             fileWriter.Flush();
@@ -47,9 +47,11 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
             }
         }
 
-        private void WriteUsedImagePredictor(NearLosslessOptions nearLosslessOptions)
+        private void WriteOptions(NearLosslessOptions nearLosslessOptions)
         {
             fileWriter.WriteValueOnBits((uint)nearLosslessOptions.PredictorType, 4);
+            fileWriter.WriteValueOnBits((uint)nearLosslessOptions.AcceptedError, 4);
+            fileWriter.WriteValueOnBits((uint)nearLosslessOptions.SaveMode, 3);
         }
 
         private static Bitmap GetImageOrThrow(string sourceFilepath)

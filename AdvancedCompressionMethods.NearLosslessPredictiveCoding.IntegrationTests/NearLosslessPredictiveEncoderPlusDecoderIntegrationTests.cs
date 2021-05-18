@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using AdvancedCompressionMethods.DI;
+using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Entities;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Enums;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces;
 using AdvancedCompressionMethods.Tests.Common;
@@ -46,7 +47,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTes
             var filepathImage = $"{Environment.CurrentDirectory}\\Images\\Lenna256an.bmp";
             TestMethods.CopyFileAndReplaceIfAlreadyExists(filepathImage, filepathSource);
 
-            encoder.Encode(filepathSource, filepathEncodedFile, predictorType);
+            encoder.Encode(filepathSource, filepathEncodedFile, GetOptions(predictorType));
             decoder.Decode(filepathEncodedFile, filepathDecodedFile);
 
             Assert.IsTrue(TestMethods.FilesHaveTheSameContent(filepathSource, filepathDecodedFile));
@@ -67,7 +68,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTes
             var filepathImage = $"{Environment.CurrentDirectory}\\Images\\Peppers256an.bmp";
             TestMethods.CopyFileAndReplaceIfAlreadyExists(filepathImage, filepathSource);
 
-            encoder.Encode(filepathSource, filepathEncodedFile, predictorType);
+            encoder.Encode(filepathSource, filepathEncodedFile, GetOptions(predictorType));
             decoder.Decode(filepathEncodedFile, filepathDecodedFile);
 
             Assert.IsTrue(TestMethods.FilesHaveTheSameContent(filepathSource, filepathDecodedFile));
@@ -79,6 +80,17 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTes
             TestMethods.DeleteFileIfExists(filepathSource);
             TestMethods.DeleteFileIfExists(filepathEncodedFile);
             TestMethods.DeleteFileIfExists(filepathDecodedFile);
+        }
+
+        private static NearLosslessOptions GetOptions(NearLosslessPredictorType predictorType)
+        {
+            return new NearLosslessOptions
+            {
+                K = 2,
+                PredictorType = predictorType,
+                PredictionLowerLimit = 0,
+                PredictionUpperLimit = 255
+            };
         }
     }
 }

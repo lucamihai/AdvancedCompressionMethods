@@ -2,7 +2,6 @@
 using System.Drawing;
 using AdvancedCompressionMethods.FileOperations.Interfaces;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Entities;
-using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Enums;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces;
 
@@ -19,13 +18,12 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
             this.fileWriter = fileWriter;
         }
 
-        public void Encode(string sourceFilepath, string destinationFilepath, NearLosslessPredictorType predictorType)
+        public void Encode(string sourceFilepath, string destinationFilepath, NearLosslessOptions nearLosslessOptions)
         {
             var image = GetImageOrThrow(sourceFilepath);
             var imageMatrices = new ImageMatrices(image);
-            var predictor = NearLosslessPredictorSelector.GetPredictor(predictorType);
 
-            PredictionMatrixHelper.SetImageMatrices(imageMatrices, predictor);
+            PredictionMatrixHelper.SetImageMatrices(imageMatrices, nearLosslessOptions);
 
             fileReader.Open(sourceFilepath);
             fileWriter.Open(destinationFilepath);

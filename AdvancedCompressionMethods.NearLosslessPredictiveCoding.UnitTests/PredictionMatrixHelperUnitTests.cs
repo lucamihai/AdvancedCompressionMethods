@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Entities;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Enums;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers;
-using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces;
 using KellermanSoftware.CompareNetObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,8 +11,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests
     [ExcludeFromCodeCoverage]
     public class PredictionMatrixHelperUnitTests
     {
-        private int k;
-        private INearLosslessPredictor predictor;
+        private NearLosslessOptions options;
         private ImageMatrices imageMatrices;
         private ImageMatrices expectedImageMatrices;
 
@@ -22,7 +20,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests
         {
             SetupCase1();
 
-            PredictionMatrixHelper.SetImageMatrices(imageMatrices, predictor);
+            PredictionMatrixHelper.SetImageMatrices(imageMatrices, options);
 
             var compareLogic = new CompareLogic();
             Assert.IsTrue(compareLogic.Compare(expectedImageMatrices, imageMatrices).AreEqual);
@@ -30,8 +28,14 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests
 
         private void SetupCase1()
         {
-            k = 2;
-            predictor = NearLosslessPredictorSelector.GetPredictor(NearLosslessPredictorType.Predictor4);
+            options = new NearLosslessOptions
+            {
+                K = 2,
+                PredictorType = NearLosslessPredictorType.Predictor4,
+                PredictionLowerLimit = 0,
+                PredictionUpperLimit = 15
+            };
+            
             imageMatrices = new ImageMatrices(4, 4);
             expectedImageMatrices = new ImageMatrices(4, 4);
 

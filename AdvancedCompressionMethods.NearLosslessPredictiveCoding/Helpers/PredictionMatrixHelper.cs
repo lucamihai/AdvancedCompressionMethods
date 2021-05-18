@@ -68,7 +68,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
 
         private static void HandlePrediction(ImageMatrices imageMatrices, NearLosslessOptions nearLosslessOptions, int row, int column, byte prediction)
         {
-            var k = nearLosslessOptions.K;
+            var k = nearLosslessOptions.AcceptedError;
 
             var error = imageMatrices.Codes[row, column] - prediction;
             var quantizedError = Quantize(error, k);

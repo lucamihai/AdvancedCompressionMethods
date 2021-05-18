@@ -30,7 +30,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests
         {
             options = new NearLosslessOptions
             {
-                K = 2,
+                AcceptedError = 2,
                 PredictorType = NearLosslessPredictorType.Predictor4,
                 PredictionLowerLimit = 0,
                 PredictionUpperLimit = 15

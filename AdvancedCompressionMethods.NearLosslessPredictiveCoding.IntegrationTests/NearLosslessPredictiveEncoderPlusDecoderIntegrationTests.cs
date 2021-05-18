@@ -86,7 +86,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTes
         {
             return new NearLosslessOptions
             {
-                K = 2,
+                AcceptedError = 2,
                 PredictorType = predictorType,
                 SaveMode = NearLosslessErrorMatrixSaveMode.JpegTable,
                 PredictionLowerLimit = 0,

@@ -28,10 +28,28 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
             fileReader.Open(sourceFilepath);
             fileWriter.Open(destinationFilepath);
 
+            CopyBitmapHeader();
+            WriteUsedImagePredictor(nearLosslessOptions);
+            var errorMatrixWriter = NearLosslessErrorMatrixWriterSelector.GetErrorMatrixWriter(nearLosslessOptions.SaveMode);
+            errorMatrixWriter.WriteErrorMatrix(imageMatrices.QuantizedErrors, fileWriter);
+            fileWriter.Flush();
+
             fileReader.Close();
             fileWriter.Close();
+        }
 
-            throw new System.NotImplementedException();
+        private void CopyBitmapHeader()
+        {
+            for (var index = 0; index < 1078; index++)
+            {
+                var currentByte = fileReader.ReadBits(8);
+                fileWriter.WriteValueOnBits(currentByte, 8);
+            }
+        }
+
+        private void WriteUsedImagePredictor(NearLosslessOptions nearLosslessOptions)
+        {
+            fileWriter.WriteValueOnBits((uint)nearLosslessOptions.PredictorType, 4);
         }
 
         private static Bitmap GetImageOrThrow(string sourceFilepath)

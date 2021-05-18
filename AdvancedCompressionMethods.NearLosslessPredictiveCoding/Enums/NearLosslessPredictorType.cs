@@ -1,6 +1,6 @@
 ﻿namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Enums
 {
-    public enum NearLosslessPredictorType
+    public enum NearLosslessPredictorType : uint
     {
         Predictor0,
         Predictor1,

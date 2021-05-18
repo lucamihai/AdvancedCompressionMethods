@@ -1,6 +1,6 @@
 ﻿namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Enums
 {
-    public enum NearLosslessErrorMatrixSaveMode
+    public enum NearLosslessErrorMatrixSaveMode : uint
     {
         FixedNumberOfBits,
         JpegTable,

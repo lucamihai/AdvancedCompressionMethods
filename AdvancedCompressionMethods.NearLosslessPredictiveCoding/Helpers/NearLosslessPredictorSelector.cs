@@ -5,7 +5,7 @@ using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Predictors;
 
 namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
 {
-    internal static class NearLosslessPredictorSelector
+    public static class NearLosslessPredictorSelector
     {
         public static INearLosslessPredictor GetPredictor(NearLosslessPredictorType nearLosslessPredictor)
         {

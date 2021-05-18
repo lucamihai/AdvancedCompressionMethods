@@ -1,6 +1,6 @@
 ﻿namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces
 {
-    internal interface INearLosslessPredictor
+    public interface INearLosslessPredictor
     {
         byte PredictValue(params byte[] values);
     }

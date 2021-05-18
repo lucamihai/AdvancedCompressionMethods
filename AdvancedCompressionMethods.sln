@@ -23,9 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.FileOperations.Benchmark", "AdvancedCompressionMethods.FileOperations.Benchmark\AdvancedCompressionMethods.FileOperations.Benchmark.csproj", "{504640E0-96B3-47F7-ACA2-F932A317692A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding", "AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj", "{60359E4D-9655-4E59-A883-B27F80882178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding", "AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj", "{60359E4D-9655-4E59-A883-B27F80882178}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests", "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests.csproj", "{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests", "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests.csproj", "{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests", "AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests.csproj", "{694154B6-6397-47B7-A637-9A389621931C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{694154B6-6397-47B7-A637-9A389621931C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{694154B6-6397-47B7-A637-9A389621931C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{694154B6-6397-47B7-A637-9A389621931C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{694154B6-6397-47B7-A637-9A389621931C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{33ED352F-736F-4FA2-A9AF-8F228DAF5051} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
 		{504640E0-96B3-47F7-ACA2-F932A317692A} = {B2D642F1-EBCC-42C3-AAED-E5454A082846}
 		{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
+		{694154B6-6397-47B7-A637-9A389621931C} = {C5849419-3876-40D2-B1B1-B5DB8A6D23CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F35C4849-5000-42C4-BB15-34507BF7A5E4}

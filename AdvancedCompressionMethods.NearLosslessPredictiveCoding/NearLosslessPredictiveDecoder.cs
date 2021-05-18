@@ -1,6 +1,7 @@
 ﻿using AdvancedCompressionMethods.FileOperations.Interfaces;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Entities;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Enums;
+using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces;
 
 namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
@@ -23,11 +24,13 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
 
             CopyBitmapHeader();
             var usedOptions = GetOptions();
+            var errorMatrixReader = NearLosslessErrorMatrixReaderSelector.GetErrorMatrixReader(usedOptions.SaveMode);
+            var quantizedErrorMatrix = errorMatrixReader.ReadErrorMatrix(fileReader);
+            var imageCodes = ErrorMatrixHelper.GetImageCodesFromQuantizedErrorMatrix(quantizedErrorMatrix, usedOptions);
+            WriteImageCodes(imageCodes);
 
             fileReader.Close();
             fileWriter.Close();
-
-            throw new System.NotImplementedException();
         }
 
         private void CopyBitmapHeader()
@@ -44,13 +47,28 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
             var bitsPredictorType = fileReader.ReadBits(4);
             var bitsAcceptedError = fileReader.ReadBits(4);
             var bitsSaveMode = fileReader.ReadBits(2);
+            var bitsLowerLimit = fileReader.ReadBits(8);
+            var bitsUpperLimit = fileReader.ReadBits(8);
 
             return new NearLosslessOptions
             {
                 PredictorType = (NearLosslessPredictorType)bitsPredictorType,
                 AcceptedError = (int)bitsAcceptedError,
-                SaveMode = (NearLosslessErrorMatrixSaveMode)bitsSaveMode
+                SaveMode = (NearLosslessErrorMatrixSaveMode)bitsSaveMode,
+                PredictionLowerLimit = (byte)bitsLowerLimit,
+                PredictionUpperLimit = (byte)bitsUpperLimit
             };
+        }
+
+        private void WriteImageCodes(byte[,] imageCodes)
+        {
+            for (var row = 255; row >= 0; row--)
+            {
+                for (var column = 0; column < 256; column++)
+                {
+                    fileWriter.WriteValueOnBits(imageCodes[column, row], 8);
+                }
+            }
         }
     }
 }

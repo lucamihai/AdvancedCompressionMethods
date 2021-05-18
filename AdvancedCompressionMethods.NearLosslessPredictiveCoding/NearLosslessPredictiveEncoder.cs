@@ -22,6 +22,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
         {
             var image = GetImageOrThrow(sourceFilepath);
             var imageMatrices = new ImageMatrices(image);
+            image.Dispose();
 
             PredictionMatrixHelper.SetImageMatrices(imageMatrices, nearLosslessOptions);
 
@@ -52,6 +53,8 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
             fileWriter.WriteValueOnBits((uint)nearLosslessOptions.PredictorType, 4);
             fileWriter.WriteValueOnBits((uint)nearLosslessOptions.AcceptedError, 4);
             fileWriter.WriteValueOnBits((uint)nearLosslessOptions.SaveMode, 3);
+            fileWriter.WriteValueOnBits(nearLosslessOptions.PredictionLowerLimit, 8);
+            fileWriter.WriteValueOnBits(nearLosslessOptions.PredictionUpperLimit, 8);
         }
 
         private static Bitmap GetImageOrThrow(string sourceFilepath)

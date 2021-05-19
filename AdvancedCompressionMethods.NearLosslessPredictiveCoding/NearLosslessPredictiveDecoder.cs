@@ -46,7 +46,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
         {
             var bitsPredictorType = fileReader.ReadBits(4);
             var bitsAcceptedError = fileReader.ReadBits(4);
-            var bitsSaveMode = fileReader.ReadBits(2);
+            var bitsSaveMode = fileReader.ReadBits(3);
             var bitsLowerLimit = fileReader.ReadBits(8);
             var bitsUpperLimit = fileReader.ReadBits(8);
 

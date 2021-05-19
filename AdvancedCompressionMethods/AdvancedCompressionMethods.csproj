@@ -6,4 +6,9 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdvancedCompressionMethods.DI\AdvancedCompressionMethods.DI.csproj" />
+    <ProjectReference Include="..\AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj" />
+  </ItemGroup>
+
 </Project>

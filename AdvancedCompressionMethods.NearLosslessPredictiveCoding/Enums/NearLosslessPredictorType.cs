@@ -10,6 +10,6 @@
         Predictor5,
         Predictor6,
         Predictor7,
-        Predictor8,
+        Predictor8
     }
 }

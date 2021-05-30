@@ -1,7 +1,9 @@
-﻿namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces
+﻿using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Entities;
+
+namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces
 {
     public interface INearLosslessPredictiveDecoder
     {
-        void Decode(string sourceFilepath, string destinationFilepath);
+        ImageMatrices Decode(string sourceFilepath, string destinationFilepath);
     }
 }

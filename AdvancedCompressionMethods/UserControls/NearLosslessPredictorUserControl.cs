@@ -16,6 +16,7 @@ namespace AdvancedCompressionMethods.UserControls
     {
         private readonly INearLosslessPredictiveEncoder nearLosslessPredictiveEncoder;
         private readonly INearLosslessPredictiveDecoder nearLosslessPredictiveDecoder;
+        private ImageMatrices imageMatricesFromPreviousRun;
         
         private Dictionary<RadioButton, NearLosslessPredictorType> predictorTypesRadioButtonsDictionary;
         private Dictionary<RadioButton, NearLosslessErrorMatrixSaveMode> saveModesRadioButtonsDictionary;
@@ -93,10 +94,10 @@ namespace AdvancedCompressionMethods.UserControls
             {
                 for (var column = 0; column < 256; column++)
                 {
-                    //var code = Math.Abs(128 + imagePredictionEncoder.ErrorMatrix[row, column] * scale);
-                    //code = GetByteFromDecimal(code);
-                    //var codeByte = (byte)code;
-                    //bitmapErrorMatrix.SetPixel(row, column, Color.FromArgb(codeByte, codeByte, codeByte));
+                    var code = Math.Abs(128 + imageMatricesFromPreviousRun.Errors[row, column] * scale);
+                    code = GetByteFromDecimal(code);
+                    var codeByte = (byte)code;
+                    bitmapErrorMatrix.SetPixel(row, column, Color.FromArgb(codeByte, codeByte, codeByte));
                 }
             }
 
@@ -139,7 +140,7 @@ namespace AdvancedCompressionMethods.UserControls
                 File.Delete(filePathDecodedImage);
             }
 
-            nearLosslessPredictiveDecoder.Decode(filePathPredictedImage, filePathDecodedImage);
+            imageMatricesFromPreviousRun = nearLosslessPredictiveDecoder.Decode(filePathPredictedImage, filePathDecodedImage);
 
             using var fileStream = new FileStream(filePathDecodedImage, FileMode.Open);
             var bmp = new Bitmap(fileStream);
@@ -153,36 +154,43 @@ namespace AdvancedCompressionMethods.UserControls
 
         private void buttonShowHistogram_Click(object sender, EventArgs e)
         {
-            //pictureBoxHistogram.Image = new Bitmap(256, 256);
-            //var histogramImage = pictureBoxHistogram.Image;
+            pictureBoxHistogram.Image = new Bitmap(256, 256);
+            var histogramImage = pictureBoxHistogram.Image;
 
-            //using (var graphics = Graphics.FromImage(histogramImage))
-            //{
-            //    var pen = new Pen(Color.Black, 1);
-            //    var frequencies = GetFrequencies();
+            using (var graphics = Graphics.FromImage(histogramImage))
+            {
+                var pen = new Pen(Color.Black, 1);
+                var frequencies = GetFrequencies();
+                var cv1 = frequencies.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-            //    for (int index = -256; index < 256; index++)
-            //    {
-            //        if (frequencies[index] < 1)
-            //        {
-            //            continue;
-            //        }
 
-            //        if (frequencies[index] > 0)
-            //        {
+                for (var index = -256; index < 256; index++)
+                {
+                    if (frequencies[index] < 1)
+                    {
+                        continue;
+                    }
 
-            //        }
+                    if (frequencies[index] > 0)
+                    {
 
-            //        var x = index + 256;
-            //        var p1 = new Point(x, histogramImage.Height - 1);
-            //        var p2 = new Point(x, histogramImage.Height - 1 - frequencies[index]);
+                    }
 
-            //        graphics.DrawLine(pen, p1, p2);
-            //    }
-            //}
+                    if (Math.Abs(frequencies[index]) > 255)
+                    {
+                        continue;
+                    }
 
-            //pictureBoxHistogram.Refresh();
-            //pictureBoxHistogram.Invalidate();
+                    var x = index + 256;
+                    var p1 = new Point(x, histogramImage.Height - 1);
+                    var p2 = new Point(x, histogramImage.Height - 1 - frequencies[index]);
+
+                    graphics.DrawLine(pen, p1, p2);
+                }
+            }
+
+            pictureBoxHistogram.Refresh();
+            pictureBoxHistogram.Invalidate();
         }
 
         private void UpdateButtonsEnabledProperty()
@@ -212,6 +220,59 @@ namespace AdvancedCompressionMethods.UserControls
             };
         }
 
+        private Dictionary<int, int> GetFrequencies()
+        {
+            var frequencies = new Dictionary<int, int>();
+
+            for (var i = -256; i < 256; i++)
+            {
+                frequencies.Add(i, 0);
+            }
+
+            if (radioButtonHistogramOriginal.Checked)
+            {
+                var bitmap = (Bitmap)pictureBoxOriginalImage.Image;
+
+                for (var row = 0; row < 256; row++)
+                {
+                    for (var column = 0; column < 256; column++)
+                    {
+                        var code = bitmap.GetPixel(row, column).R;
+                        frequencies[code]++;
+                    }
+                }
+            }
+
+            if (radioButtonHistogramErrorMatrix.Checked)
+            {
+                for (int row = 0; row < 256; row++)
+                {
+                    for (int column = 0; column < 256; column++)
+                    {
+                        var code = imageMatricesFromPreviousRun.Errors[row, column];
+                        frequencies[code]++;
+                    }
+                }
+            }
+
+            if (radioButtonHistogramDecoded.Checked)
+            {
+                var bitmap = (Bitmap)pictureBoxDecodedImage.Image;
+
+                for (int row = 0; row < 256; row++)
+                {
+                    for (int column = 0; column < 256; column++)
+                    {
+                        //var code = bitmap.GetPixel(row, column).R;
+                        var code = imageMatricesFromPreviousRun.Decoded[row, column];
+                        frequencies[code]++;
+                    }
+                }
+            }
+
+            return frequencies;
+        }
+
         private void InitializePredictorTypesRadioButtonsDictionary()
         {
             predictorTypesRadioButtonsDictionary = new Dictionary<RadioButton, NearLosslessPredictorType>
@@ -234,8 +295,23 @@ namespace AdvancedCompressionMethods.UserControls
             {
                 {radioButtonSaveMode9Bits, NearLosslessErrorMatrixSaveMode.FixedNumberOfBits },
                 {radioButtonSaveModeJpegTable, NearLosslessErrorMatrixSaveMode.JpegTable },
-                {radioButtonSaveModeArithmetic, NearLosslessErrorMatrixSaveMode.ArithmeticCoding },
+                {radioButtonSaveModeArithmetic, NearLosslessErrorMatrixSaveMode.ArithmeticCoding }
             };
+        }
+
+        private static byte GetByteFromDecimal(decimal value)
+        {
+            if (value < 0)
+            {
+                return 0;
+            }
+
+            if (value > 255)
+            {
+                return 255;
+            }
+
+            return (byte)value;
         }
     }
 }

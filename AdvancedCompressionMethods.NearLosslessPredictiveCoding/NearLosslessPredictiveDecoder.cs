@@ -17,7 +17,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
             this.fileWriter = fileWriter;
         }
 
-        public void Decode(string sourceFilepath, string destinationFilepath)
+        public ImageMatrices Decode(string sourceFilepath, string destinationFilepath)
         {
             fileReader.Open(sourceFilepath);
             fileWriter.Open(destinationFilepath);
@@ -26,11 +26,13 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding
             var usedOptions = GetOptions();
             var errorMatrixReader = NearLosslessErrorMatrixReaderSelector.GetErrorMatrixReader(usedOptions.SaveMode);
             var quantizedErrorMatrix = errorMatrixReader.ReadErrorMatrix(fileReader);
-            var imageCodes = ErrorMatrixHelper.GetImageCodesFromQuantizedErrorMatrix(quantizedErrorMatrix, usedOptions);
-            WriteImageCodes(imageCodes);
+            var imageMatrices = ErrorMatrixHelper.GetImageMatricesFromQuantizedErrorMatrix(quantizedErrorMatrix, usedOptions);
+            WriteImageCodes(imageMatrices.Decoded);
 
             fileReader.Close();
             fileWriter.Close();
+
+            return imageMatrices;
         }
 
         private void CopyBitmapHeader()

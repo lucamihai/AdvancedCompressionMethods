@@ -493,7 +493,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.pictureBoxHistogram.Location = new System.Drawing.Point(417, 353);
             this.pictureBoxHistogram.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pictureBoxHistogram.Name = "pictureBoxHistogram";
-            this.pictureBoxHistogram.Size = new System.Drawing.Size(512, 208);
+            this.pictureBoxHistogram.Size = new System.Drawing.Size(512, 180);
             this.pictureBoxHistogram.TabIndex = 18;
             this.pictureBoxHistogram.TabStop = false;
             // 

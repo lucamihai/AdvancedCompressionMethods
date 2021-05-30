@@ -13,7 +13,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
             {
                 case NearLosslessErrorMatrixSaveMode.FixedNumberOfBits:
                 {
-                    throw new NotImplementedException();
+                    return new FixedNumberOfBitsErrorMatrixReader();
                 }
 
                 case NearLosslessErrorMatrixSaveMode.JpegTable:

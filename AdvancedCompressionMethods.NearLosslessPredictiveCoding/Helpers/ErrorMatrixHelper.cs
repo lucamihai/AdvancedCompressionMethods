@@ -8,7 +8,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
     // TODO: Maybe rename to 'ImageCodesHelper'?
     public static class ErrorMatrixHelper
     {
-        public static byte[,] GetImageCodesFromQuantizedErrorMatrix(int[,] quantizedErrors, NearLosslessOptions nearLosslessOptions)
+        public static ImageMatrices GetImageMatricesFromQuantizedErrorMatrix(int[,] quantizedErrors, NearLosslessOptions nearLosslessOptions)
         {
             var predictor = NearLosslessPredictorSelector.GetPredictor(nearLosslessOptions.PredictorType);
             var imageMatrices = new ImageMatrices(quantizedErrors.GetLength(0), quantizedErrors.GetLength(1));
@@ -32,7 +32,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
                 }
             }
 
-            return imageMatrices.Decoded;
+            return imageMatrices;
         }
 
         private static void HandleFirstPixel(ImageMatrices imageMatrices, NearLosslessOptions nearLosslessOptions)

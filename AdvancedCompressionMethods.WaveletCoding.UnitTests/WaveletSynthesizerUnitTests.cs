@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using AdvancedCompressionMethods.WaveletCoding.Entities;
 using AdvancedCompressionMethods.WaveletCoding.Helpers;
 using KellermanSoftware.CompareNetObjects;
@@ -31,7 +33,16 @@ namespace AdvancedCompressionMethods.WaveletCoding.UnitTests
 
             var actualResult = waveletSynthesizer.GetSynthesis(analysisCollection);
 
+            actualResult = actualResult.Select(Round).ToList();
             Assert.IsTrue(compareLogic.Compare(expectedResult, actualResult).AreEqual);
+        }
+
+        private static double Round(double value)
+        {
+            value = Math.Round(value, 6);
+            value = Math.Round(value);
+
+            return value;
         }
 
         private void SetupCase1()

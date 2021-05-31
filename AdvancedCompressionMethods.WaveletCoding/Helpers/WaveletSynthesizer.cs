@@ -36,12 +36,6 @@ namespace AdvancedCompressionMethods.WaveletCoding.Helpers
                     high += formattedHigh[i + j] * synthesisHighCoefficients[j];
                 }
 
-                low = Math.Round(low, 6);
-                low = Math.Round(low);
-
-                high = Math.Round(high, 6);
-                high = Math.Round(high);
-
                 reconstructedValues.Add(low + high);
             }
 

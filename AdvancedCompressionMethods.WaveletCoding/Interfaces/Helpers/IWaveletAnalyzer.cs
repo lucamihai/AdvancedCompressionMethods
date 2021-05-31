@@ -5,6 +5,6 @@ namespace AdvancedCompressionMethods.WaveletCoding.Interfaces.Helpers
 {
     public interface IWaveletAnalyzer
     {
-        WaveletAnalysisCollection GetAnalysis(List<byte> values);
+        WaveletAnalysisCollection GetAnalysis(List<double> values);
     }
 }

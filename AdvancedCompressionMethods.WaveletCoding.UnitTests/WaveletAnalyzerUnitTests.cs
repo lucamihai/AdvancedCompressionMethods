@@ -12,7 +12,7 @@ namespace AdvancedCompressionMethods.WaveletCoding.UnitTests
     public class WaveletAnalyzerUnitTests
     {
         private WaveletAnalyzer waveletAnalyzer;
-        private List<byte> values;
+        private List<double> values;
         private WaveletAnalysisCollection expectedResult;
         private CompareLogic compareLogic;
 
@@ -36,7 +36,7 @@ namespace AdvancedCompressionMethods.WaveletCoding.UnitTests
 
         private void SetupCase1()
         {
-            values = new List<byte> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 3, 2, 7, 5, 2, 8, 2, 55, 2, 7, 3, 1, 6, 9, 1, 3, 2, 66 };
+            values = new List<double> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 3, 2, 7, 5, 2, 8, 2, 55, 2, 7, 3, 1, 6, 9, 1, 3, 2, 66 };
 
             expectedResult = new WaveletAnalysisCollection
             {

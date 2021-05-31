@@ -15,7 +15,7 @@ namespace AdvancedCompressionMethods.WaveletCoding.Helpers
             InitializeCoefficients();
         }
 
-        public WaveletAnalysisCollection GetAnalysis(List<byte> values)
+        public WaveletAnalysisCollection GetAnalysis(List<double> values)
         {
             var analysisCollection = new WaveletAnalysisCollection();
             var formattedValues = WaveletValuesListMirroringHelper.GetValuesListWithMirroredExtremities(values);

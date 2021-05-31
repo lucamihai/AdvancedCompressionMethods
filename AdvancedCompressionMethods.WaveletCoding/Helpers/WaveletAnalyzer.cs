@@ -18,7 +18,7 @@ namespace AdvancedCompressionMethods.WaveletCoding.Helpers
         public WaveletAnalysisCollection GetAnalysis(List<byte> values)
         {
             var analysisCollection = new WaveletAnalysisCollection();
-            var formattedValues = GetValuesListWithMirroredExtremities(values);
+            var formattedValues = WaveletValuesListMirroringHelper.GetValuesListWithMirroredExtremities(values);
 
             for (var i = 0; i < values.Count; i++)
             {
@@ -44,29 +44,6 @@ namespace AdvancedCompressionMethods.WaveletCoding.Helpers
             }
 
             return analysisCollection;
-        }
-
-        // TODO: Could be extracted into a helper
-        private static List<byte> GetValuesListWithMirroredExtremities(List<byte> values)
-        {
-            // TODO: Maybe handle cases when values.Count < 4?
-
-            var newValues = new List<byte>();
-
-            for (var i = 4; i >= 1; i--)
-            {
-                newValues.Add(values[i]);
-            }
-
-            newValues.AddRange(values);
-
-            var indexOfLastElement = values.Count - 1;
-            for (var i = 0; i < 4; i++)
-            {
-                newValues.Add(values[indexOfLastElement -1 - i]);
-            }
-
-            return newValues;
         }
 
         private void InitializeCoefficients()

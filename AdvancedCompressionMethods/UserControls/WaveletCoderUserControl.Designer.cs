@@ -65,6 +65,19 @@ namespace AdvancedCompressionMethods.UserControls
             this.label20 = new System.Windows.Forms.Label();
             this.textBoxMinError = new System.Windows.Forms.TextBox();
             this.textBoxMaxError = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label26 = new System.Windows.Forms.Label();
+            this.numericUpDownHighlighOffset = new System.Windows.Forms.NumericUpDown();
+            this.label27 = new System.Windows.Forms.Label();
+            this.numericUpDownHighlightScale = new System.Windows.Forms.NumericUpDown();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.numericUpDownHighlightY = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.numericUpDownHighlightX = new System.Windows.Forms.NumericUpDown();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.buttonRedrawWavelet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWaveletImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLevelsAllTheWay)).BeginInit();
@@ -73,6 +86,11 @@ namespace AdvancedCompressionMethods.UserControls
             this.panelLevel3.SuspendLayout();
             this.panelLevel4.SuspendLayout();
             this.panelLevel5.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighlighOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighlightScale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighlightY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighlightX)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxOriginalImage
@@ -115,7 +133,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonAnalysisAllTheWay
             // 
-            this.buttonAnalysisAllTheWay.Location = new System.Drawing.Point(1092, 515);
+            this.buttonAnalysisAllTheWay.Location = new System.Drawing.Point(1088, 479);
             this.buttonAnalysisAllTheWay.Name = "buttonAnalysisAllTheWay";
             this.buttonAnalysisAllTheWay.Size = new System.Drawing.Size(107, 23);
             this.buttonAnalysisAllTheWay.TabIndex = 11;
@@ -127,7 +145,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(1205, 513);
+            this.label6.Location = new System.Drawing.Point(1201, 477);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 19);
             this.label6.TabIndex = 13;
@@ -135,7 +153,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // numericUpDownLevelsAllTheWay
             // 
-            this.numericUpDownLevelsAllTheWay.Location = new System.Drawing.Point(1205, 535);
+            this.numericUpDownLevelsAllTheWay.Location = new System.Drawing.Point(1201, 499);
             this.numericUpDownLevelsAllTheWay.Maximum = new decimal(new int[] {
             5,
             0,
@@ -402,7 +420,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonSynthesisAllTheWay
             // 
-            this.buttonSynthesisAllTheWay.Location = new System.Drawing.Point(1092, 544);
+            this.buttonSynthesisAllTheWay.Location = new System.Drawing.Point(1088, 508);
             this.buttonSynthesisAllTheWay.Name = "buttonSynthesisAllTheWay";
             this.buttonSynthesisAllTheWay.Size = new System.Drawing.Size(107, 23);
             this.buttonSynthesisAllTheWay.TabIndex = 27;
@@ -446,11 +464,184 @@ namespace AdvancedCompressionMethods.UserControls
             this.textBoxMaxError.TabIndex = 31;
             this.textBoxMaxError.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label26);
+            this.panel1.Controls.Add(this.numericUpDownHighlighOffset);
+            this.panel1.Controls.Add(this.label27);
+            this.panel1.Controls.Add(this.numericUpDownHighlightScale);
+            this.panel1.Controls.Add(this.label25);
+            this.panel1.Controls.Add(this.label24);
+            this.panel1.Controls.Add(this.numericUpDownHighlightY);
+            this.panel1.Controls.Add(this.label23);
+            this.panel1.Controls.Add(this.numericUpDownHighlightX);
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Controls.Add(this.label21);
+            this.panel1.Location = new System.Drawing.Point(692, 544);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 32;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label26.Location = new System.Drawing.Point(115, 58);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(40, 15);
+            this.label26.TabIndex = 33;
+            this.label26.Text = "Offset";
+            // 
+            // numericUpDownHighlighOffset
+            // 
+            this.numericUpDownHighlighOffset.Location = new System.Drawing.Point(124, 74);
+            this.numericUpDownHighlighOffset.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDownHighlighOffset.Minimum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownHighlighOffset.Name = "numericUpDownHighlighOffset";
+            this.numericUpDownHighlighOffset.Size = new System.Drawing.Size(44, 23);
+            this.numericUpDownHighlighOffset.TabIndex = 32;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label27.Location = new System.Drawing.Point(115, 10);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(35, 15);
+            this.label27.TabIndex = 31;
+            this.label27.Text = "Scale";
+            // 
+            // numericUpDownHighlightScale
+            // 
+            this.numericUpDownHighlightScale.DecimalPlaces = 2;
+            this.numericUpDownHighlightScale.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.numericUpDownHighlightScale.Location = new System.Drawing.Point(124, 26);
+            this.numericUpDownHighlightScale.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDownHighlightScale.Name = "numericUpDownHighlightScale";
+            this.numericUpDownHighlightScale.Size = new System.Drawing.Size(44, 23);
+            this.numericUpDownHighlightScale.TabIndex = 30;
+            this.numericUpDownHighlightScale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label25
+            // 
+            this.label25.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label25.Location = new System.Drawing.Point(108, 10);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(1, 81);
+            this.label25.TabIndex = 29;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label24.Location = new System.Drawing.Point(4, 76);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(15, 15);
+            this.label24.TabIndex = 28;
+            this.label24.Text = "Y";
+            // 
+            // numericUpDownHighlightY
+            // 
+            this.numericUpDownHighlightY.Location = new System.Drawing.Point(26, 74);
+            this.numericUpDownHighlightY.Maximum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.numericUpDownHighlightY.Name = "numericUpDownHighlightY";
+            this.numericUpDownHighlightY.Size = new System.Drawing.Size(44, 23);
+            this.numericUpDownHighlightY.TabIndex = 27;
+            this.numericUpDownHighlightY.Value = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label23.Location = new System.Drawing.Point(4, 51);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(16, 15);
+            this.label23.TabIndex = 26;
+            this.label23.Text = "X";
+            // 
+            // numericUpDownHighlightX
+            // 
+            this.numericUpDownHighlightX.Location = new System.Drawing.Point(26, 49);
+            this.numericUpDownHighlightX.Maximum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.numericUpDownHighlightX.Name = "numericUpDownHighlightX";
+            this.numericUpDownHighlightX.Size = new System.Drawing.Size(44, 23);
+            this.numericUpDownHighlightX.TabIndex = 25;
+            this.numericUpDownHighlightX.Value = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label22.Location = new System.Drawing.Point(3, 30);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(76, 15);
+            this.label22.TabIndex = 24;
+            this.label22.Text = "Starting from";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label21.Location = new System.Drawing.Point(3, 4);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(99, 19);
+            this.label21.TabIndex = 23;
+            this.label21.Text = "Highlight pixels";
+            // 
+            // buttonRedrawWavelet
+            // 
+            this.buttonRedrawWavelet.Location = new System.Drawing.Point(923, 544);
+            this.buttonRedrawWavelet.Name = "buttonRedrawWavelet";
+            this.buttonRedrawWavelet.Size = new System.Drawing.Size(75, 23);
+            this.buttonRedrawWavelet.TabIndex = 33;
+            this.buttonRedrawWavelet.Text = "Redraw";
+            this.buttonRedrawWavelet.UseVisualStyleBackColor = true;
+            this.buttonRedrawWavelet.Click += new System.EventHandler(this.buttonRedrawWavelet_Click);
+            // 
             // WaveletCoderUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.buttonRedrawWavelet);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBoxMaxError);
             this.Controls.Add(this.textBoxMinError);
             this.Controls.Add(this.label20);
@@ -487,6 +678,12 @@ namespace AdvancedCompressionMethods.UserControls
             this.panelLevel4.PerformLayout();
             this.panelLevel5.ResumeLayout(false);
             this.panelLevel5.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighlighOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighlightScale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighlightY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighlightX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -530,5 +727,18 @@ namespace AdvancedCompressionMethods.UserControls
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBoxMinError;
         private System.Windows.Forms.TextBox textBoxMaxError;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.NumericUpDown numericUpDownHighlightY;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown numericUpDownHighlightX;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.NumericUpDown numericUpDownHighlighOffset;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.NumericUpDown numericUpDownHighlightScale;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button buttonRedrawWavelet;
     }
 }

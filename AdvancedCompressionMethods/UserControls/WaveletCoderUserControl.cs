@@ -82,12 +82,24 @@ namespace AdvancedCompressionMethods.UserControls
             var width = imageCodes.GetLength(0);
             var height = imageCodes.GetLength(1);
 
+            var highlightStartPositionX = (int)numericUpDownHighlightX.Value;
+            var highlightStartPositionY = (int)numericUpDownHighlightY.Value;
+            var highlightScale = numericUpDownHighlightScale.Value;
+            var highlightOffset = (int)numericUpDownHighlighOffset.Value;
+
             var image = new Bitmap(512, 512);
             for (var i = 0; i < width; i++)
             {
                 for (var j = 0; j < height; j++)
                 {
                     var pixelIntensity = (byte) Math.Abs(Math.Round(imageCodes[i, j]));
+
+                    if (i >= highlightStartPositionX || j >= highlightStartPositionY )
+                    {
+                        var newIntensity = pixelIntensity * highlightScale + highlightOffset;
+                        pixelIntensity = GetByteFromDecimal(newIntensity);
+                    }
+
                     image.SetPixel(i, j, Color.FromArgb(pixelIntensity, pixelIntensity, pixelIntensity));
                 }
             }
@@ -105,6 +117,9 @@ namespace AdvancedCompressionMethods.UserControls
             {
                 waveletCoder.ApplyHorizontalAnalysis(i + 1);
                 waveletCoder.ApplyVerticalAnalysis(i + 1);
+
+                HalveNumericUpDownValue(numericUpDownHighlightX);
+                HalveNumericUpDownValue(numericUpDownHighlightY);
             }
 
             UpdateWaveletImage();
@@ -118,6 +133,9 @@ namespace AdvancedCompressionMethods.UserControls
             {
                 waveletCoder.ApplyVerticalSynthesis(levels - i);
                 waveletCoder.ApplyHorizontalSynthesis(levels - i);
+
+                DoubleNumericUpDownValue(numericUpDownHighlightX);
+                DoubleNumericUpDownValue(numericUpDownHighlightY);
             }
 
             UpdateWaveletImage();
@@ -222,6 +240,44 @@ namespace AdvancedCompressionMethods.UserControls
             }
         }
 
+        private void buttonRedrawWavelet_Click(object sender, EventArgs e)
+        {
+            UpdateWaveletImage();
+        }
+
+        private void DoubleNumericUpDownValue(NumericUpDown numericUpDown)
+        {
+            var currentValue = numericUpDown.Value;
+            var newValue = currentValue * 2;
+            numericUpDown.Value = newValue > numericUpDown.Maximum
+                ? currentValue
+                : newValue;
+        }
+
+        private void HalveNumericUpDownValue(NumericUpDown numericUpDown)
+        {
+            var currentValue = numericUpDown.Value;
+            var newValue = currentValue / 2;
+            numericUpDown.Value = newValue < numericUpDown.Minimum
+                ? currentValue
+                : newValue;
+        }
+
+        private static byte GetByteFromDecimal(decimal value)
+        {
+            if (value < 0)
+            {
+                return 0;
+            }
+
+            if (value > 255)
+            {
+                return 255;
+            }
+
+            return (byte)value;
+        }
+
         private void GenerateButtons()
         {
             GenerateButtonsForPanel(panelLevel1, 1);
@@ -247,6 +303,7 @@ namespace AdvancedCompressionMethods.UserControls
             horizontalAnalysisButton.Click += delegate(object? sender, EventArgs args)
             {
                 waveletCoder.ApplyHorizontalAnalysis(level);
+                HalveNumericUpDownValue(numericUpDownHighlightX);
                 UpdateWaveletImage();
             };
 
@@ -258,6 +315,7 @@ namespace AdvancedCompressionMethods.UserControls
             verticalAnalysisButton.Click += delegate (object? sender, EventArgs args)
             {
                 waveletCoder.ApplyVerticalAnalysis(level);
+                HalveNumericUpDownValue(numericUpDownHighlightY);
                 UpdateWaveletImage();
             };
 
@@ -269,6 +327,7 @@ namespace AdvancedCompressionMethods.UserControls
             horizontalSynthesisButton.Click += delegate (object? sender, EventArgs args)
             {
                 waveletCoder.ApplyHorizontalSynthesis(level);
+                DoubleNumericUpDownValue(numericUpDownHighlightX);
                 UpdateWaveletImage();
             };
 
@@ -280,6 +339,7 @@ namespace AdvancedCompressionMethods.UserControls
             verticalSynthesisButton.Click += delegate (object? sender, EventArgs args)
             {
                 waveletCoder.ApplyVerticalSynthesis(level);
+                DoubleNumericUpDownValue(numericUpDownHighlightY);
                 UpdateWaveletImage();
             };
 
@@ -288,7 +348,5 @@ namespace AdvancedCompressionMethods.UserControls
             panel.Controls.Add(horizontalSynthesisButton);
             panel.Controls.Add(verticalSynthesisButton);
         }
-
-        
     }
 }

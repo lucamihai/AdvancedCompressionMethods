@@ -61,6 +61,10 @@ namespace AdvancedCompressionMethods.UserControls
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.buttonSynthesisAllTheWay = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBoxMinError = new System.Windows.Forms.TextBox();
+            this.textBoxMaxError = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWaveletImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLevelsAllTheWay)).BeginInit();
@@ -169,6 +173,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.buttonTestErrors.TabIndex = 15;
             this.buttonTestErrors.Text = "Test Errors";
             this.buttonTestErrors.UseVisualStyleBackColor = true;
+            this.buttonTestErrors.Click += new System.EventHandler(this.buttonTestErrors_Click);
             // 
             // buttonLoadWaveletImage
             // 
@@ -405,11 +410,51 @@ namespace AdvancedCompressionMethods.UserControls
             this.buttonSynthesisAllTheWay.UseVisualStyleBackColor = true;
             this.buttonSynthesisAllTheWay.Click += new System.EventHandler(this.buttonSynthesisAllTheWay_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(126, 574);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 15);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "Min error:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(126, 601);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(61, 15);
+            this.label20.TabIndex = 29;
+            this.label20.Text = "Max error:";
+            // 
+            // textBoxMinError
+            // 
+            this.textBoxMinError.Location = new System.Drawing.Point(191, 571);
+            this.textBoxMinError.Name = "textBoxMinError";
+            this.textBoxMinError.ReadOnly = true;
+            this.textBoxMinError.Size = new System.Drawing.Size(80, 23);
+            this.textBoxMinError.TabIndex = 30;
+            this.textBoxMinError.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBoxMaxError
+            // 
+            this.textBoxMaxError.Location = new System.Drawing.Point(191, 600);
+            this.textBoxMaxError.Name = "textBoxMaxError";
+            this.textBoxMaxError.ReadOnly = true;
+            this.textBoxMaxError.Size = new System.Drawing.Size(80, 23);
+            this.textBoxMaxError.TabIndex = 31;
+            this.textBoxMaxError.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // WaveletCoderUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.textBoxMaxError);
+            this.Controls.Add(this.textBoxMinError);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonSynthesisAllTheWay);
             this.Controls.Add(this.panelLevel5);
             this.Controls.Add(this.panelLevel4);
@@ -481,5 +526,9 @@ namespace AdvancedCompressionMethods.UserControls
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button buttonSynthesisAllTheWay;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBoxMinError;
+        private System.Windows.Forms.TextBox textBoxMaxError;
     }
 }

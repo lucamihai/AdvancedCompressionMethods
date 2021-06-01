@@ -52,7 +52,7 @@ namespace AdvancedCompressionMethods.UserControls
                 waveletCoder.Load(imageCodes);
 
                 pictureBoxOriginalImage.Image = bmp;
-                pictureBoxWaveletImage.Image = bmp;
+                pictureBoxWaveletImage.Image = new Bitmap(bmp);
             }
         }
 
@@ -121,6 +121,40 @@ namespace AdvancedCompressionMethods.UserControls
             }
 
             UpdateWaveletImage();
+        }
+
+        private void buttonTestErrors_Click(object sender, EventArgs e)
+        {
+            // TODO: Ensure matrices have equal sizes
+            var originalImageAsBitmap = new Bitmap(pictureBoxOriginalImage.Image);
+            var originalImageCodes = GetImageCodesOrThrow(originalImageAsBitmap);
+            var waveletImageCodes = waveletCoder.ImageCodes;
+
+            var minError = double.MaxValue;
+            var maxError = double.MinValue;
+
+            for (var i = 0; i < originalImageCodes.GetLength(0); i++)
+            {
+                for (var j = 0; j < originalImageCodes.GetLength(1); j++)
+                {
+                    var waveletCode = waveletImageCodes[i, j];
+                    var originalCode = originalImageCodes[i, j];
+                    var currentError = waveletCode - originalCode;
+
+                    if (currentError < minError)
+                    {
+                        minError = currentError;
+                    }
+
+                    if (currentError > maxError)
+                    {
+                        maxError = currentError;
+                    }
+                }
+            }
+
+            textBoxMinError.Text = minError.ToString("N6");
+            textBoxMaxError.Text = maxError.ToString("N6");
         }
 
         private void buttonLoadWaveletImage_Click(object sender, EventArgs e)
@@ -254,5 +288,7 @@ namespace AdvancedCompressionMethods.UserControls
             panel.Controls.Add(horizontalSynthesisButton);
             panel.Controls.Add(verticalSynthesisButton);
         }
+
+        
     }
 }

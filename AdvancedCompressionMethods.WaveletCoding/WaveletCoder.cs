@@ -26,9 +26,11 @@ namespace AdvancedCompressionMethods.WaveletCoding
 
         public void ApplyHorizontalAnalysis(int level)
         {
-            for (var columnNumber = 0; columnNumber < ImageCodes.GetLength(1); columnNumber++)
+            var length = ImageCodes.GetLength(1) / level;
+
+            for (var columnNumber = 0; columnNumber < length; columnNumber++)
             {
-                var column = GetColumn(columnNumber);
+                var column = GetColumn(columnNumber, level);
                 var columnAnalysis = waveletAnalyzer.GetAnalysis(column);
                 CopyColumnAnalysis(columnAnalysis, columnNumber);
             }
@@ -36,9 +38,11 @@ namespace AdvancedCompressionMethods.WaveletCoding
 
         public void ApplyVerticalAnalysis(int level)
         {
-            for (var rowNumber = 0; rowNumber < ImageCodes.GetLength(0); rowNumber++)
+            var length = ImageCodes.GetLength(0) / level;
+
+            for (var rowNumber = 0; rowNumber < length; rowNumber++)
             {
-                var row = GetRow(rowNumber);
+                var row = GetRow(rowNumber, level);
                 var rowAnalysis = waveletAnalyzer.GetAnalysis(row);
                 CopyRowAnalysis(rowAnalysis, rowNumber);
             }
@@ -46,9 +50,11 @@ namespace AdvancedCompressionMethods.WaveletCoding
 
         public void ApplyHorizontalSynthesis(int level)
         {
-            for (var columnNumber = 0; columnNumber < ImageCodes.GetLength(1); columnNumber++)
+            var length = ImageCodes.GetLength(1) / level;
+
+            for (var columnNumber = 0; columnNumber < length; columnNumber++)
             {
-                var column = GetColumn(columnNumber);
+                var column = GetColumn(columnNumber, level);
                 var columnForSynthesis = FormatForSynthesis(column);
                 var columnSynthesis = waveletSynthesizer.GetSynthesis(columnForSynthesis);
                 CopyColumnSynthesis(columnSynthesis, columnNumber);
@@ -57,20 +63,23 @@ namespace AdvancedCompressionMethods.WaveletCoding
 
         public void ApplyVerticalSynthesis(int level)
         {
-            for (var rowNumber = 0; rowNumber < ImageCodes.GetLength(0); rowNumber++)
+            var length = ImageCodes.GetLength(0) / level;
+
+            for (var rowNumber = 0; rowNumber < length; rowNumber++)
             {
-                var row = GetRow(rowNumber);
+                var row = GetRow(rowNumber, level);
                 var rowForSynthesis = FormatForSynthesis(row);
                 var rowSynthesis = waveletSynthesizer.GetSynthesis(rowForSynthesis);
                 CopyRowSynthesis(rowSynthesis, rowNumber);
             }
         }
 
-        private List<double> GetRow(int rowNumber)
+        private List<double> GetRow(int rowNumber, int level)
         {
             var row = new List<double>();
+            var length = ImageCodes.GetLength(1) / level;
 
-            for (var columnNumber = 0; columnNumber < ImageCodes.GetLength(1); columnNumber++)
+            for (var columnNumber = 0; columnNumber < length; columnNumber++)
             {
                 row.Add(ImageCodes[rowNumber, columnNumber]);
             }
@@ -78,11 +87,12 @@ namespace AdvancedCompressionMethods.WaveletCoding
             return row;
         }
 
-        private List<double> GetColumn(int columnNumber)
+        private List<double> GetColumn(int columnNumber, int level)
         {
             var column = new List<double>();
+            var length = ImageCodes.GetLength(0) / level;
 
-            for (var rowNumber = 0; rowNumber < ImageCodes.GetLength(0); rowNumber++)
+            for (var rowNumber = 0; rowNumber < length; rowNumber++)
             {
                 column.Add(ImageCodes[rowNumber, columnNumber]);
             }

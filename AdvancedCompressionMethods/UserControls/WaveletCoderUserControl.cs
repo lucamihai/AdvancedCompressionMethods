@@ -116,8 +116,8 @@ namespace AdvancedCompressionMethods.UserControls
 
             for (var i = 0; i < levels; i++)
             {
-                waveletCoder.ApplyVerticalSynthesis(5 - i);
-                waveletCoder.ApplyHorizontalSynthesis(5 - i);
+                waveletCoder.ApplyVerticalSynthesis(levels - i);
+                waveletCoder.ApplyHorizontalSynthesis(levels - i);
             }
 
             UpdateWaveletImage();

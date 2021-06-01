@@ -33,7 +33,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.pictureBoxWaveletImage = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.buttonRunAllTheWay = new System.Windows.Forms.Button();
+            this.buttonAnalysisAllTheWay = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDownLevelsAllTheWay = new System.Windows.Forms.NumericUpDown();
             this.buttonLoadOriginalImage = new System.Windows.Forms.Button();
@@ -60,6 +60,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.buttonSynthesisAllTheWay = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWaveletImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLevelsAllTheWay)).BeginInit();
@@ -108,15 +109,15 @@ namespace AdvancedCompressionMethods.UserControls
             this.label2.TabIndex = 3;
             this.label2.Text = "Wavelet Image";
             // 
-            // buttonRunAllTheWay
+            // buttonAnalysisAllTheWay
             // 
-            this.buttonRunAllTheWay.Location = new System.Drawing.Point(1092, 515);
-            this.buttonRunAllTheWay.Name = "buttonRunAllTheWay";
-            this.buttonRunAllTheWay.Size = new System.Drawing.Size(107, 43);
-            this.buttonRunAllTheWay.TabIndex = 11;
-            this.buttonRunAllTheWay.Text = "Run all the way";
-            this.buttonRunAllTheWay.UseVisualStyleBackColor = true;
-            this.buttonRunAllTheWay.Click += new System.EventHandler(this.buttonRunAllTheWay_Click);
+            this.buttonAnalysisAllTheWay.Location = new System.Drawing.Point(1092, 515);
+            this.buttonAnalysisAllTheWay.Name = "buttonAnalysisAllTheWay";
+            this.buttonAnalysisAllTheWay.Size = new System.Drawing.Size(107, 23);
+            this.buttonAnalysisAllTheWay.TabIndex = 11;
+            this.buttonAnalysisAllTheWay.Text = "Analysis for";
+            this.buttonAnalysisAllTheWay.UseVisualStyleBackColor = true;
+            this.buttonAnalysisAllTheWay.Click += new System.EventHandler(this.buttonAnalysisAllTheWay_Click);
             // 
             // label6
             // 
@@ -392,11 +393,22 @@ namespace AdvancedCompressionMethods.UserControls
             this.label19.TabIndex = 5;
             this.label19.Text = "Level 5";
             // 
+            // buttonSynthesisAllTheWay
+            // 
+            this.buttonSynthesisAllTheWay.Location = new System.Drawing.Point(1092, 544);
+            this.buttonSynthesisAllTheWay.Name = "buttonSynthesisAllTheWay";
+            this.buttonSynthesisAllTheWay.Size = new System.Drawing.Size(107, 23);
+            this.buttonSynthesisAllTheWay.TabIndex = 27;
+            this.buttonSynthesisAllTheWay.Text = "Synthesis for";
+            this.buttonSynthesisAllTheWay.UseVisualStyleBackColor = true;
+            this.buttonSynthesisAllTheWay.Click += new System.EventHandler(this.buttonSynthesisAllTheWay_Click);
+            // 
             // WaveletCoderUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.buttonSynthesisAllTheWay);
             this.Controls.Add(this.panelLevel5);
             this.Controls.Add(this.panelLevel4);
             this.Controls.Add(this.panelLevel3);
@@ -408,7 +420,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.Controls.Add(this.buttonLoadOriginalImage);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.numericUpDownLevelsAllTheWay);
-            this.Controls.Add(this.buttonRunAllTheWay);
+            this.Controls.Add(this.buttonAnalysisAllTheWay);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBoxWaveletImage);
@@ -439,7 +451,7 @@ namespace AdvancedCompressionMethods.UserControls
         private System.Windows.Forms.PictureBox pictureBoxWaveletImage;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button buttonRunAllTheWay;
+        private System.Windows.Forms.Button buttonAnalysisAllTheWay;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDownLevelsAllTheWay;
         private System.Windows.Forms.Button buttonLoadOriginalImage;
@@ -466,5 +478,6 @@ namespace AdvancedCompressionMethods.UserControls
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button buttonSynthesisAllTheWay;
     }
 }

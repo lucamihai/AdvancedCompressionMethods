@@ -95,7 +95,7 @@ namespace AdvancedCompressionMethods.UserControls
             pictureBoxWaveletImage.Invalidate();
         }
 
-        private void buttonRunAllTheWay_Click(object sender, EventArgs e)
+        private void buttonAnalysisAllTheWay_Click(object sender, EventArgs e)
         {
             var levels = (int)numericUpDownLevelsAllTheWay.Value;
 
@@ -105,11 +105,20 @@ namespace AdvancedCompressionMethods.UserControls
                 waveletCoder.ApplyVerticalAnalysis(i + 1);
             }
 
+            UpdateWaveletImage();
+        }
+
+        private void buttonSynthesisAllTheWay_Click(object sender, EventArgs e)
+        {
+            var levels = (int)numericUpDownLevelsAllTheWay.Value;
+
             for (var i = 0; i < levels; i++)
             {
                 waveletCoder.ApplyVerticalSynthesis(5 - i);
                 waveletCoder.ApplyHorizontalSynthesis(5 - i);
             }
+
+            UpdateWaveletImage();
         }
 
         private void GenerateButtons()
@@ -178,5 +187,7 @@ namespace AdvancedCompressionMethods.UserControls
             panel.Controls.Add(horizontalSynthesisButton);
             panel.Controls.Add(verticalSynthesisButton);
         }
+
+        
     }
 }

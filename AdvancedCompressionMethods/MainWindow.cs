@@ -44,7 +44,7 @@ namespace AdvancedCompressionMethods
                 {radioButtonArithmeticCoding, new UserControl()},
                 {radioButtonNearLossless, new NearLosslessPredictorUserControl()},
                 {radioButtonFractalImageCoder, new UserControl()},
-                {radioButtonWaveletDecomposition, new UserControl()}
+                {radioButtonWaveletDecomposition, new WaveletCoderUserControl()}
             };
         }
     }

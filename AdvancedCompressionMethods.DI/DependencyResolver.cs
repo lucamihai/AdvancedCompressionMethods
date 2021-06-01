@@ -7,6 +7,10 @@ using AdvancedCompressionMethods.FileOperations.Interfaces.Validators;
 using AdvancedCompressionMethods.FileOperations.Validators;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Interfaces;
+using AdvancedCompressionMethods.WaveletCoding;
+using AdvancedCompressionMethods.WaveletCoding.Helpers;
+using AdvancedCompressionMethods.WaveletCoding.Interfaces;
+using AdvancedCompressionMethods.WaveletCoding.Interfaces.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AdvancedCompressionMethods.DI
@@ -28,6 +32,10 @@ namespace AdvancedCompressionMethods.DI
 
             services.AddScoped<INearLosslessPredictiveEncoder, NearLosslessPredictiveEncoder>();
             services.AddScoped<INearLosslessPredictiveDecoder, NearLosslessPredictiveDecoder>();
+
+            services.AddScoped<IWaveletCoder, WaveletCoder>();
+            services.AddScoped<IWaveletAnalyzer, WaveletAnalyzer>();
+            services.AddScoped<IWaveletSynthesizer, WaveletSynthesizer>();
 
             return services;
         }

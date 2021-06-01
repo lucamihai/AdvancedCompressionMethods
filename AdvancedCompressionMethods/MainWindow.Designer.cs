@@ -97,7 +97,7 @@ namespace AdvancedCompressionMethods
             // 
             this.panelActiveUserControl.Location = new System.Drawing.Point(182, 12);
             this.panelActiveUserControl.Name = "panelActiveUserControl";
-            this.panelActiveUserControl.Size = new System.Drawing.Size(933, 577);
+            this.panelActiveUserControl.Size = new System.Drawing.Size(1280, 720);
             this.panelActiveUserControl.TabIndex = 1;
             // 
             // MainWindow
@@ -105,7 +105,7 @@ namespace AdvancedCompressionMethods
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(1142, 605);
+            this.ClientSize = new System.Drawing.Size(1479, 752);
             this.Controls.Add(this.panelActiveUserControl);
             this.Controls.Add(this.panelRadioButtons);
             this.Name = "MainWindow";

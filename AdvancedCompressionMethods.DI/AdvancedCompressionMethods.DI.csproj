@@ -12,6 +12,7 @@
     <ProjectReference Include="..\AdvancedCompressionMethods.ArithmeticCoding\AdvancedCompressionMethods.ArithmeticCoding.csproj" />
     <ProjectReference Include="..\AdvancedCompressionMethods.FileOperations\AdvancedCompressionMethods.FileOperations.csproj" />
     <ProjectReference Include="..\AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj" />
+    <ProjectReference Include="..\AdvancedCompressionMethods.WaveletCoding\AdvancedCompressionMethods.WaveletCoding.csproj" />
   </ItemGroup>
 
 </Project>

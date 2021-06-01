@@ -85,12 +85,14 @@ namespace AdvancedCompressionMethods.UserControls
             {
                 for (var j = 0; j < height; j++)
                 {
-                    var pixelIntensity = (byte) Math.Round(imageCodes[i, j]);
+                    var pixelIntensity = (byte) Math.Abs(Math.Round(imageCodes[i, j]));
                     image.SetPixel(i, j, Color.FromArgb(pixelIntensity, pixelIntensity, pixelIntensity));
                 }
             }
 
+            pictureBoxWaveletImage.Image.Dispose();
             pictureBoxWaveletImage.Image = new Bitmap(image);
+            pictureBoxWaveletImage.Invalidate();
         }
 
         private void buttonRunAllTheWay_Click(object sender, EventArgs e)

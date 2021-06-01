@@ -10,7 +10,9 @@ namespace AdvancedCompressionMethods.UserControls
 {
     public partial class WaveletCoderUserControl : UserControl
     {
+        private string filePathOriginalImage;
         private readonly IWaveletCoder waveletCoder;
+
         public WaveletCoderUserControl()
         {
             InitializeComponent();
@@ -41,7 +43,7 @@ namespace AdvancedCompressionMethods.UserControls
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                var filePathOriginalImage = openFileDialog.FileName;
+                filePathOriginalImage = openFileDialog.FileName;
 
                 using var fileStream = new FileStream(filePathOriginalImage, FileMode.Open);
                 var bmp = new Bitmap(fileStream);
@@ -121,6 +123,71 @@ namespace AdvancedCompressionMethods.UserControls
             UpdateWaveletImage();
         }
 
+        private void buttonLoadWaveletImage_Click(object sender, EventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Title = "Browse Wavelet files",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "wvl",
+                Filter = "Wavelet (*.wvl)|*.wvl",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePathOriginalImage = openFileDialog.FileName;
+
+                using var fileStream = new FileStream(filePathOriginalImage, FileMode.Open);
+                using var binaryReader = new BinaryReader(fileStream);
+
+                var width = binaryReader.ReadInt32();
+                var height = binaryReader.ReadInt32();
+
+                var imageCodes = new double[width, height];
+
+                for (var i = 0; i < width; i++)
+                {
+                    for (var j = 0; j < height; j++)
+                    {
+                        imageCodes[i, j] = binaryReader.ReadDouble();
+                    }
+                }
+                
+                waveletCoder.Load(imageCodes);
+                UpdateWaveletImage();
+            }
+        }
+
+        private void buttonSaveWaveletImage_Click(object sender, EventArgs e)
+        {
+            var filepathWaveletImage = $"{filePathOriginalImage}.wvl";
+            using var fileStream = new FileStream(filepathWaveletImage, FileMode.Create);
+            using var binaryWriter = new BinaryWriter(fileStream);
+
+            var imageCodes = waveletCoder.ImageCodes;
+            var width = imageCodes.GetLength(0);
+            var height = imageCodes.GetLength(1);
+
+            binaryWriter.Write(width);
+            binaryWriter.Write(height);
+
+            for (var i = 0; i < width; i++)
+            {
+                for (var j = 0; j < height; j++)
+                {
+                    binaryWriter.Write(imageCodes[i, j]);
+                }
+            }
+        }
+
         private void GenerateButtons()
         {
             GenerateButtonsForPanel(panelLevel1, 1);
@@ -187,7 +254,5 @@ namespace AdvancedCompressionMethods.UserControls
             panel.Controls.Add(horizontalSynthesisButton);
             panel.Controls.Add(verticalSynthesisButton);
         }
-
-        
     }
 }

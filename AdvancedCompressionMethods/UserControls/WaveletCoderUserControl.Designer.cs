@@ -178,6 +178,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.buttonLoadWaveletImage.TabIndex = 16;
             this.buttonLoadWaveletImage.Text = "Load";
             this.buttonLoadWaveletImage.UseVisualStyleBackColor = true;
+            this.buttonLoadWaveletImage.Click += new System.EventHandler(this.buttonLoadWaveletImage_Click);
             // 
             // buttonSaveWaveletImage
             // 
@@ -187,6 +188,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.buttonSaveWaveletImage.TabIndex = 17;
             this.buttonSaveWaveletImage.Text = "Save";
             this.buttonSaveWaveletImage.UseVisualStyleBackColor = true;
+            this.buttonSaveWaveletImage.Click += new System.EventHandler(this.buttonSaveWaveletImage_Click);
             // 
             // panelLevel1
             // 

@@ -79,14 +79,13 @@ namespace AdvancedCompressionMethods.UserControls
             var imageCodes = waveletCoder.ImageCodes;
             var width = imageCodes.GetLength(0);
             var height = imageCodes.GetLength(1);
-            var byteImageCodes = new byte[width, height];
 
             var image = new Bitmap(512, 512);
             for (var i = 0; i < width; i++)
             {
                 for (var j = 0; j < height; j++)
                 {
-                    var pixelIntensity = byteImageCodes[i, j];
+                    var pixelIntensity = (byte) Math.Round(imageCodes[i, j]);
                     image.SetPixel(i, j, Color.FromArgb(pixelIntensity, pixelIntensity, pixelIntensity));
                 }
             }

@@ -10,7 +10,7 @@ namespace AdvancedCompressionMethods.FileOperations
     {
         private const uint EightBitMask = byte.MaxValue;
 
-        private readonly IBuffer buffer;
+        private IBuffer buffer;
         private readonly IFilepathValidator filepathValidator;
 
         private FileStream fileStream;
@@ -26,8 +26,10 @@ namespace AdvancedCompressionMethods.FileOperations
         public void Open(string filepath)
         {
             filepathValidator.ValidateAndThrow(filepath, checkIfExists: false);
-            
-            buffer.OnCurrentBitReset = null;
+
+            //buffer.OnCurrentBitReset = null;
+            // TODO: Investigate reinitializing alternative
+            buffer = new Buffer();
             buffer.OnCurrentBitReset += OnCurrentBitReset;
 
             FilePath = filepath;
@@ -94,8 +96,8 @@ namespace AdvancedCompressionMethods.FileOperations
         [ExcludeFromCodeCoverage]
         private void ReleaseUnmanagedResources()
         {
-            fileStream.Close();
-            fileStream.Dispose();
+            fileStream?.Close();
+            fileStream?.Dispose();
         }
 
         [ExcludeFromCodeCoverage]

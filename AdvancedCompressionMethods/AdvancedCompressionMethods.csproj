@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CompareNETObjects" Version="4.72.0" />
+    <PackageReference Include="ScottPlot.WinForms" Version="4.1.16" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AdvancedCompressionMethods.DI\AdvancedCompressionMethods.DI.csproj" />
     <ProjectReference Include="..\AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj" />
   </ItemGroup>

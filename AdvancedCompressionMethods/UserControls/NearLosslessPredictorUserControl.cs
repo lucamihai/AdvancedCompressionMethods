@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Entities;
 using AdvancedCompressionMethods.NearLosslessPredictiveCoding.Enums;
+using ScottPlot;
 
 namespace AdvancedCompressionMethods.UserControls
 {
@@ -17,7 +18,8 @@ namespace AdvancedCompressionMethods.UserControls
         private readonly INearLosslessPredictiveEncoder nearLosslessPredictiveEncoder;
         private readonly INearLosslessPredictiveDecoder nearLosslessPredictiveDecoder;
         private ImageMatrices imageMatricesFromPreviousRun;
-        
+        private Plot plot;
+
         private Dictionary<RadioButton, NearLosslessPredictorType> predictorTypesRadioButtonsDictionary;
         private Dictionary<RadioButton, NearLosslessErrorMatrixSaveMode> saveModesRadioButtonsDictionary;
 
@@ -30,6 +32,7 @@ namespace AdvancedCompressionMethods.UserControls
             InitializeComponent();
             InitializePredictorTypesRadioButtonsDictionary();
             InitializeSaveModesRadioButtonsDictionary();
+            InitializeHistogramArea();
 
             var serviceProvider = DependencyResolver.GetServices().BuildServiceProvider();
             nearLosslessPredictiveEncoder = serviceProvider.GetRequiredService<INearLosslessPredictiveEncoder>();
@@ -133,7 +136,7 @@ namespace AdvancedCompressionMethods.UserControls
 
         private void DecodeClick(object sender, EventArgs e)
         {
-            filePathDecodedImage = $"{filePathDecodedImage}.bmp";
+            filePathDecodedImage = $"{filePathPredictedImage}.bmp";
 
             if (File.Exists(filePathDecodedImage))
             {
@@ -141,10 +144,17 @@ namespace AdvancedCompressionMethods.UserControls
             }
 
             imageMatricesFromPreviousRun = nearLosslessPredictiveDecoder.Decode(filePathPredictedImage, filePathDecodedImage);
+            
+            pictureBoxDecodedImage.Image = FromFile(filePathDecodedImage);
+        }
 
-            using var fileStream = new FileStream(filePathDecodedImage, FileMode.Open);
-            var bmp = new Bitmap(fileStream);
-            pictureBoxDecodedImage.Image = bmp;
+        private static Image FromFile(string path)
+        {
+            var bytes = File.ReadAllBytes(path);
+            var ms = new MemoryStream(bytes);
+            var img = Image.FromStream(ms);
+
+            return img;
         }
 
         private void SaveDecodedClick(object sender, EventArgs e)
@@ -154,43 +164,33 @@ namespace AdvancedCompressionMethods.UserControls
 
         private void buttonShowHistogram_Click(object sender, EventArgs e)
         {
-            pictureBoxHistogram.Image = new Bitmap(256, 256);
-            var histogramImage = pictureBoxHistogram.Image;
+            plot.Clear();
+            plot.YAxis.Label("Frequency");
+            plot.XAxis.Label("Value");
+            plot.SetAxisLimits(yMin: 0);
 
-            using (var graphics = Graphics.FromImage(histogramImage))
+            var frequencies = GetFrequencies();
+
+            for (var index = -256; index < 256; index++)
             {
-                var pen = new Pen(Color.Black, 1);
-                var frequencies = GetFrequencies();
-                var cv1 = frequencies.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+                plot.AddLine(x1: index, y1: 0, x2: index, y2: frequencies[index], Color.Black, lineWidth: 1f);
 
-
-                for (var index = -256; index < 256; index++)
+                if (frequencies[index] < 1)
                 {
-                    if (frequencies[index] < 1)
-                    {
-                        continue;
-                    }
-
-                    if (frequencies[index] > 0)
-                    {
-
-                    }
-
-                    if (Math.Abs(frequencies[index]) > 255)
-                    {
-                        continue;
-                    }
-
-                    var x = index + 256;
-                    var p1 = new Point(x, histogramImage.Height - 1);
-                    var p2 = new Point(x, histogramImage.Height - 1 - frequencies[index]);
-
-                    graphics.DrawLine(pen, p1, p2);
+                    continue;
                 }
-            }
 
-            pictureBoxHistogram.Refresh();
-            pictureBoxHistogram.Invalidate();
+                if (frequencies[index] > 0)
+                {
+
+                }
+
+                if (Math.Abs(frequencies[index]) > 255)
+                {
+                    continue;
+                }
+                
+            }
         }
 
         private void UpdateButtonsEnabledProperty()
@@ -245,11 +245,11 @@ namespace AdvancedCompressionMethods.UserControls
 
             if (radioButtonHistogramErrorMatrix.Checked)
             {
-                for (int row = 0; row < 256; row++)
+                for (var row = 0; row < 256; row++)
                 {
-                    for (int column = 0; column < 256; column++)
+                    for (var column = 0; column < 256; column++)
                     {
-                        var code = imageMatricesFromPreviousRun.Errors[row, column];
+                        var code = imageMatricesFromPreviousRun.DequantizedErrors[row, column];
                         frequencies[code]++;
                     }
                 }
@@ -257,13 +257,10 @@ namespace AdvancedCompressionMethods.UserControls
 
             if (radioButtonHistogramDecoded.Checked)
             {
-                var bitmap = (Bitmap)pictureBoxDecodedImage.Image;
-
-                for (int row = 0; row < 256; row++)
+                for (var row = 0; row < 256; row++)
                 {
-                    for (int column = 0; column < 256; column++)
+                    for (var column = 0; column < 256; column++)
                     {
-                        //var code = bitmap.GetPixel(row, column).R;
                         var code = imageMatricesFromPreviousRun.Decoded[row, column];
                         frequencies[code]++;
                     }
@@ -297,6 +294,20 @@ namespace AdvancedCompressionMethods.UserControls
                 {radioButtonSaveModeJpegTable, NearLosslessErrorMatrixSaveMode.JpegTable },
                 {radioButtonSaveModeArithmetic, NearLosslessErrorMatrixSaveMode.ArithmeticCoding }
             };
+        }
+
+        private void InitializeHistogramArea()
+        {
+            var formsPlot = new FormsPlot();
+            formsPlot.Width = panelHistogram.Width;
+            formsPlot.Height = panelHistogram.Height;
+            
+            panelHistogram.Controls.Add(formsPlot);
+
+            plot = formsPlot.Plot;
+            plot.YAxis.Label("Frequency");
+            plot.XAxis.Label("Value");
+            plot.SetAxisLimits(yMin: 0);
         }
 
         private static byte GetByteFromDecimal(decimal value)

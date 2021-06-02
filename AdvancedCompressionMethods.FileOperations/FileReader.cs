@@ -8,7 +8,7 @@ namespace AdvancedCompressionMethods.FileOperations
 {
     public class FileReader : IFileReader, IDisposable
     {
-        private readonly IBuffer buffer;
+        private IBuffer buffer;
         private readonly IFilepathValidator filepathValidator;
 
         private FileStream fileStream;
@@ -41,7 +41,10 @@ namespace AdvancedCompressionMethods.FileOperations
 
         public void Reset()
         {
-            buffer.OnCurrentBitReset = null;
+            //buffer.OnCurrentBitReset = null;
+            //buffer.Reset();
+            // TODO: Investigate reinitializing alternative
+            buffer = new Buffer();
             buffer.OnCurrentBitReset += OnCurrentBitReset;
 
             fileStream.Position = 0;
@@ -102,7 +105,7 @@ namespace AdvancedCompressionMethods.FileOperations
             buffer.Value = (byte)fileStream.ReadByte();
         }
 
-        #region IDisbosable stuff
+        #region IDisposable stuff
 
         [ExcludeFromCodeCoverage]
         ~FileReader()
@@ -113,8 +116,8 @@ namespace AdvancedCompressionMethods.FileOperations
         [ExcludeFromCodeCoverage]
         private void ReleaseUnmanagedResources()
         {
-            fileStream.Close();
-            fileStream.Dispose();
+            fileStream?.Close();
+            fileStream?.Dispose();
         }
 
         [ExcludeFromCodeCoverage]

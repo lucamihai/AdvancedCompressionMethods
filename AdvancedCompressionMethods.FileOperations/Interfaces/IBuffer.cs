@@ -10,5 +10,6 @@
         void AddValueStartingFromCurrentBit(byte value, byte numberOfBitsToWrite);
         byte GetValueStartingFromCurrentBit(byte numberOfBitsToRead);
         void Flush();
+        void Reset();
     }
 }

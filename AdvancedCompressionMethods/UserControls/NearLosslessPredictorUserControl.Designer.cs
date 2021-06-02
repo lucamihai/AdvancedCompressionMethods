@@ -60,7 +60,6 @@ namespace AdvancedCompressionMethods.UserControls
             this.radioButtonHistogramOriginal = new System.Windows.Forms.RadioButton();
             this.numericUpDownHistogram = new System.Windows.Forms.NumericUpDown();
             this.buttonShowHistogram = new System.Windows.Forms.Button();
-            this.pictureBoxHistogram = new System.Windows.Forms.PictureBox();
             this.numericUpDownAcceptedError = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -72,6 +71,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.radioButtonSaveModeJpegTable = new System.Windows.Forms.RadioButton();
             this.radioButtonSaveMode9Bits = new System.Windows.Forms.RadioButton();
             this.label8 = new System.Windows.Forms.Label();
+            this.panelHistogram = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxErrorMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDecodedImage)).BeginInit();
@@ -79,7 +79,6 @@ namespace AdvancedCompressionMethods.UserControls
             this.panelImagePredictorSelection.SuspendLayout();
             this.panelHistogramSelection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHistogram)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHistogram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAcceptedError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDomainMinValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDomainMaxValue)).BeginInit();
@@ -93,7 +92,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.pictureBoxOriginalImage.Location = new System.Drawing.Point(4, 22);
             this.pictureBoxOriginalImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pictureBoxOriginalImage.Name = "pictureBoxOriginalImage";
-            this.pictureBoxOriginalImage.Size = new System.Drawing.Size(298, 295);
+            this.pictureBoxOriginalImage.Size = new System.Drawing.Size(256, 256);
             this.pictureBoxOriginalImage.TabIndex = 0;
             this.pictureBoxOriginalImage.TabStop = false;
             // 
@@ -104,7 +103,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.pictureBoxErrorMatrix.Location = new System.Drawing.Point(317, 22);
             this.pictureBoxErrorMatrix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pictureBoxErrorMatrix.Name = "pictureBoxErrorMatrix";
-            this.pictureBoxErrorMatrix.Size = new System.Drawing.Size(298, 295);
+            this.pictureBoxErrorMatrix.Size = new System.Drawing.Size(256, 256);
             this.pictureBoxErrorMatrix.TabIndex = 1;
             this.pictureBoxErrorMatrix.TabStop = false;
             // 
@@ -115,7 +114,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.pictureBoxDecodedImage.Location = new System.Drawing.Point(631, 22);
             this.pictureBoxDecodedImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pictureBoxDecodedImage.Name = "pictureBoxDecodedImage";
-            this.pictureBoxDecodedImage.Size = new System.Drawing.Size(298, 295);
+            this.pictureBoxDecodedImage.Size = new System.Drawing.Size(256, 256);
             this.pictureBoxDecodedImage.TabIndex = 2;
             this.pictureBoxDecodedImage.TabStop = false;
             // 
@@ -154,7 +153,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonLoadImage
             // 
-            this.buttonLoadImage.Location = new System.Drawing.Point(5, 318);
+            this.buttonLoadImage.Location = new System.Drawing.Point(5, 285);
             this.buttonLoadImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonLoadImage.Name = "buttonLoadImage";
             this.buttonLoadImage.Size = new System.Drawing.Size(88, 27);
@@ -165,7 +164,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonPredict
             // 
-            this.buttonPredict.Location = new System.Drawing.Point(110, 318);
+            this.buttonPredict.Location = new System.Drawing.Point(110, 285);
             this.buttonPredict.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonPredict.Name = "buttonPredict";
             this.buttonPredict.Size = new System.Drawing.Size(88, 27);
@@ -176,7 +175,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonStore
             // 
-            this.buttonStore.Location = new System.Drawing.Point(215, 318);
+            this.buttonStore.Location = new System.Drawing.Point(215, 285);
             this.buttonStore.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonStore.Name = "buttonStore";
             this.buttonStore.Size = new System.Drawing.Size(88, 27);
@@ -193,7 +192,7 @@ namespace AdvancedCompressionMethods.UserControls
             0,
             0,
             131072});
-            this.numericUpDownErrorMatrixScale.Location = new System.Drawing.Point(340, 321);
+            this.numericUpDownErrorMatrixScale.Location = new System.Drawing.Point(340, 288);
             this.numericUpDownErrorMatrixScale.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numericUpDownErrorMatrixScale.Maximum = new decimal(new int[] {
             5,
@@ -216,7 +215,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonShowErrorMatrix
             // 
-            this.buttonShowErrorMatrix.Location = new System.Drawing.Point(451, 318);
+            this.buttonShowErrorMatrix.Location = new System.Drawing.Point(451, 285);
             this.buttonShowErrorMatrix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonShowErrorMatrix.Name = "buttonShowErrorMatrix";
             this.buttonShowErrorMatrix.Size = new System.Drawing.Size(120, 27);
@@ -227,7 +226,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonSaveDecoded
             // 
-            this.buttonSaveDecoded.Location = new System.Drawing.Point(826, 317);
+            this.buttonSaveDecoded.Location = new System.Drawing.Point(826, 284);
             this.buttonSaveDecoded.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonSaveDecoded.Name = "buttonSaveDecoded";
             this.buttonSaveDecoded.Size = new System.Drawing.Size(103, 27);
@@ -238,7 +237,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonDecode
             // 
-            this.buttonDecode.Location = new System.Drawing.Point(736, 317);
+            this.buttonDecode.Location = new System.Drawing.Point(736, 284);
             this.buttonDecode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonDecode.Name = "buttonDecode";
             this.buttonDecode.Size = new System.Drawing.Size(83, 27);
@@ -249,7 +248,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonLoadEncodedImage
             // 
-            this.buttonLoadEncodedImage.Location = new System.Drawing.Point(631, 317);
+            this.buttonLoadEncodedImage.Location = new System.Drawing.Point(631, 284);
             this.buttonLoadEncodedImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonLoadEncodedImage.Name = "buttonLoadEncodedImage";
             this.buttonLoadEncodedImage.Size = new System.Drawing.Size(98, 27);
@@ -271,7 +270,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.panelImagePredictorSelection.Controls.Add(this.radioButtonImagePredictor2);
             this.panelImagePredictorSelection.Controls.Add(this.radioButtonImagePredictor1);
             this.panelImagePredictorSelection.Controls.Add(this.radioButtonImagePredictor0);
-            this.panelImagePredictorSelection.Location = new System.Drawing.Point(5, 353);
+            this.panelImagePredictorSelection.Location = new System.Drawing.Point(4, 324);
             this.panelImagePredictorSelection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panelImagePredictorSelection.Name = "panelImagePredictorSelection";
             this.panelImagePredictorSelection.Size = new System.Drawing.Size(171, 138);
@@ -403,7 +402,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.panelHistogramSelection.Controls.Add(this.radioButtonHistogramDecoded);
             this.panelHistogramSelection.Controls.Add(this.radioButtonHistogramErrorMatrix);
             this.panelHistogramSelection.Controls.Add(this.radioButtonHistogramOriginal);
-            this.panelHistogramSelection.Location = new System.Drawing.Point(298, 353);
+            this.panelHistogramSelection.Location = new System.Drawing.Point(297, 324);
             this.panelHistogramSelection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panelHistogramSelection.Name = "panelHistogramSelection";
             this.panelHistogramSelection.Size = new System.Drawing.Size(120, 88);
@@ -455,7 +454,7 @@ namespace AdvancedCompressionMethods.UserControls
             0,
             0,
             131072});
-            this.numericUpDownHistogram.Location = new System.Drawing.Point(332, 485);
+            this.numericUpDownHistogram.Location = new System.Drawing.Point(331, 456);
             this.numericUpDownHistogram.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numericUpDownHistogram.Maximum = new decimal(new int[] {
             2,
@@ -478,7 +477,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             // buttonShowHistogram
             // 
-            this.buttonShowHistogram.Location = new System.Drawing.Point(289, 514);
+            this.buttonShowHistogram.Location = new System.Drawing.Point(288, 485);
             this.buttonShowHistogram.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonShowHistogram.Name = "buttonShowHistogram";
             this.buttonShowHistogram.Size = new System.Drawing.Size(120, 27);
@@ -487,20 +486,10 @@ namespace AdvancedCompressionMethods.UserControls
             this.buttonShowHistogram.UseVisualStyleBackColor = true;
             this.buttonShowHistogram.Click += new System.EventHandler(this.buttonShowHistogram_Click);
             // 
-            // pictureBoxHistogram
-            // 
-            this.pictureBoxHistogram.BackColor = System.Drawing.SystemColors.Window;
-            this.pictureBoxHistogram.Location = new System.Drawing.Point(417, 353);
-            this.pictureBoxHistogram.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pictureBoxHistogram.Name = "pictureBoxHistogram";
-            this.pictureBoxHistogram.Size = new System.Drawing.Size(512, 180);
-            this.pictureBoxHistogram.TabIndex = 18;
-            this.pictureBoxHistogram.TabStop = false;
-            // 
             // numericUpDownAcceptedError
             // 
             this.numericUpDownAcceptedError.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numericUpDownAcceptedError.Location = new System.Drawing.Point(110, 497);
+            this.numericUpDownAcceptedError.Location = new System.Drawing.Point(109, 468);
             this.numericUpDownAcceptedError.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numericUpDownAcceptedError.Maximum = new decimal(new int[] {
             10,
@@ -521,7 +510,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(13, 498);
+            this.label5.Location = new System.Drawing.Point(12, 469);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 15);
@@ -532,7 +521,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(5, 526);
+            this.label6.Location = new System.Drawing.Point(4, 497);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 15);
@@ -542,7 +531,7 @@ namespace AdvancedCompressionMethods.UserControls
             // numericUpDownDomainMinValue
             // 
             this.numericUpDownDomainMinValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numericUpDownDomainMinValue.Location = new System.Drawing.Point(110, 525);
+            this.numericUpDownDomainMinValue.Location = new System.Drawing.Point(109, 496);
             this.numericUpDownDomainMinValue.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numericUpDownDomainMinValue.Maximum = new decimal(new int[] {
             255,
@@ -558,7 +547,7 @@ namespace AdvancedCompressionMethods.UserControls
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(5, 546);
+            this.label7.Location = new System.Drawing.Point(4, 517);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(103, 15);
@@ -573,7 +562,7 @@ namespace AdvancedCompressionMethods.UserControls
             0,
             0,
             131072});
-            this.numericUpDownDomainMaxValue.Location = new System.Drawing.Point(110, 545);
+            this.numericUpDownDomainMaxValue.Location = new System.Drawing.Point(109, 516);
             this.numericUpDownDomainMaxValue.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numericUpDownDomainMaxValue.Maximum = new decimal(new int[] {
             255,
@@ -596,7 +585,7 @@ namespace AdvancedCompressionMethods.UserControls
             this.panelSaveModeSelection.Controls.Add(this.radioButtonSaveModeJpegTable);
             this.panelSaveModeSelection.Controls.Add(this.radioButtonSaveMode9Bits);
             this.panelSaveModeSelection.Controls.Add(this.label8);
-            this.panelSaveModeSelection.Location = new System.Drawing.Point(183, 353);
+            this.panelSaveModeSelection.Location = new System.Drawing.Point(182, 324);
             this.panelSaveModeSelection.Name = "panelSaveModeSelection";
             this.panelSaveModeSelection.Size = new System.Drawing.Size(108, 102);
             this.panelSaveModeSelection.TabIndex = 25;
@@ -650,11 +639,19 @@ namespace AdvancedCompressionMethods.UserControls
             this.label8.TabIndex = 20;
             this.label8.Text = "Save mode";
             // 
+            // panelHistogram
+            // 
+            this.panelHistogram.Location = new System.Drawing.Point(418, 317);
+            this.panelHistogram.Name = "panelHistogram";
+            this.panelHistogram.Size = new System.Drawing.Size(512, 256);
+            this.panelHistogram.TabIndex = 26;
+            // 
             // NearLosslessPredictorUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.panelHistogram);
             this.Controls.Add(this.panelSaveModeSelection);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.numericUpDownDomainMaxValue);
@@ -662,7 +659,6 @@ namespace AdvancedCompressionMethods.UserControls
             this.Controls.Add(this.numericUpDownDomainMinValue);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.numericUpDownAcceptedError);
-            this.Controls.Add(this.pictureBoxHistogram);
             this.Controls.Add(this.buttonShowHistogram);
             this.Controls.Add(this.numericUpDownHistogram);
             this.Controls.Add(this.panelHistogramSelection);
@@ -693,7 +689,6 @@ namespace AdvancedCompressionMethods.UserControls
             this.panelHistogramSelection.ResumeLayout(false);
             this.panelHistogramSelection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHistogram)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHistogram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAcceptedError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDomainMinValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDomainMaxValue)).EndInit();
@@ -736,7 +731,6 @@ namespace AdvancedCompressionMethods.UserControls
         private System.Windows.Forms.RadioButton radioButtonHistogramOriginal;
         private System.Windows.Forms.NumericUpDown numericUpDownHistogram;
         private System.Windows.Forms.Button buttonShowHistogram;
-        private System.Windows.Forms.PictureBox pictureBoxHistogram;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numericUpDownAcceptedError;
         private System.Windows.Forms.Label label5;
@@ -749,5 +743,6 @@ namespace AdvancedCompressionMethods.UserControls
         private System.Windows.Forms.RadioButton radioButtonSaveMode9Bits;
         private System.Windows.Forms.RadioButton radioButtonSaveModeJpegTable;
         private System.Windows.Forms.RadioButton radioButtonSaveModeArithmetic;
+        private System.Windows.Forms.Panel panelHistogram;
     }
 }

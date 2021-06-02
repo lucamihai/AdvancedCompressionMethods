@@ -77,6 +77,11 @@ namespace AdvancedCompressionMethods.FileOperations
             AddValueStartingFromCurrentBit(127, 7);
         }
 
+        public void Reset()
+        {
+            bitArray.SetAll(false);
+        }
+
         private static byte GetByteFromBitArray(BitArray bitArray)
         {
             byte value = 0;

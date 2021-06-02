@@ -33,7 +33,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.ErrorMatrixWri
             {
                 return;
             }
-
+            
             if (number < 0)
             {
                 var maxValueForGivenBits = Math.Pow(2, requiredBits) - 1;

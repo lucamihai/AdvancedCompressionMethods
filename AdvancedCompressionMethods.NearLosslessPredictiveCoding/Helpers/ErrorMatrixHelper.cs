@@ -75,10 +75,10 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
         {
             var k = nearLosslessOptions.AcceptedError;
 
-            var error = imageMatrices.Codes[row, column] - prediction;
             var quantizedError = imageMatrices.QuantizedErrors[row, column];
             var dequantizedError = Dequantize(quantizedError, k);
             var decoded = GetByte(dequantizedError + prediction, nearLosslessOptions.PredictionLowerLimit, nearLosslessOptions.PredictionUpperLimit);
+            var error = decoded - prediction;
 
             imageMatrices.Predictions[row, column] = prediction;
             imageMatrices.Errors[row, column] = error;

@@ -6,14 +6,14 @@
         {
             // TODO: Extract lower and upper limits
 
-            if (number < 0)
+            if (number < min)
             {
-                return 0;
+                return min;
             }
 
-            if (number > 255)
+            if (number > max)
             {
-                return 255;
+                return max;
             }
 
             return (byte) number;

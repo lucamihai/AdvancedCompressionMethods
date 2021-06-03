@@ -26,7 +26,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
                     var b = imageMatrices.Decoded[row, column - 1];
                     var c = imageMatrices.Decoded[row - 1, column - 1];
 
-                    var prediction = predictor.PredictValue(a, b, c);
+                    var prediction = predictor.PredictValue(nearLosslessOptions.PredictionLowerLimit, nearLosslessOptions.PredictionUpperLimit, a, b, c);
 
                     HandlePrediction(imageMatrices, nearLosslessOptions, row, column, prediction);
                 }
@@ -40,7 +40,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
             var halfway = (nearLosslessOptions.PredictionUpperLimit - nearLosslessOptions.PredictionLowerLimit) / 2.0;
             var rounded = (int)Math.Ceiling(halfway);
 
-            HandlePrediction(imageMatrices, nearLosslessOptions, 0, 0, rounded.ToAbsoluteByte());
+            HandlePrediction(imageMatrices, nearLosslessOptions, 0, 0, rounded.ToAbsoluteByte(nearLosslessOptions.PredictionLowerLimit, nearLosslessOptions.PredictionUpperLimit));
         }
 
         private static void HandleFirstColumn(ImageMatrices imageMatrices, NearLosslessOptions nearLosslessOptions, INearLosslessPredictor predictor)
@@ -51,7 +51,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
             for (var row = 1; row < imageMatrices.Width; row++)
             {
                 var a = imageMatrices.Decoded[row - 1, 0];
-                var prediction = predictor.PredictValue(a, b, c);
+                var prediction = predictor.PredictValue(nearLosslessOptions.PredictionLowerLimit, nearLosslessOptions.PredictionUpperLimit, a, b, c);
 
                 HandlePrediction(imageMatrices, nearLosslessOptions, row, 0, prediction);
             }
@@ -65,7 +65,7 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
             for (var column = 1; column < imageMatrices.Height; column++)
             {
                 var b = imageMatrices.Decoded[0, column - 1];
-                var prediction = predictor.PredictValue(a, b, c);
+                var prediction = predictor.PredictValue(nearLosslessOptions.PredictionLowerLimit, nearLosslessOptions.PredictionUpperLimit, a, b, c);
 
                 HandlePrediction(imageMatrices, nearLosslessOptions, 0, column, prediction);
             }
@@ -75,10 +75,10 @@ namespace AdvancedCompressionMethods.NearLosslessPredictiveCoding.Helpers
         {
             var k = nearLosslessOptions.AcceptedError;
 
+            var error = imageMatrices.Codes[row, column] - prediction;
             var quantizedError = imageMatrices.QuantizedErrors[row, column];
             var dequantizedError = Dequantize(quantizedError, k);
             var decoded = GetByte(dequantizedError + prediction, nearLosslessOptions.PredictionLowerLimit, nearLosslessOptions.PredictionUpperLimit);
-            var error = decoded - prediction;
 
             imageMatrices.Predictions[row, column] = prediction;
             imageMatrices.Errors[row, column] = error;

@@ -2,6 +2,6 @@
 {
     public interface INearLosslessPredictor
     {
-        byte PredictValue(params byte[] values);
+        byte PredictValue(byte min, byte max, params byte[] values);
     }
 }

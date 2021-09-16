@@ -9,29 +9,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C5849419-3876-40D2-B1B1-B5DB8A6D23CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.FileOperations.IntegrationTests", "AdvancedCompressionMethods.FileOperations.IntegrationTests\AdvancedCompressionMethods.FileOperations.IntegrationTests.csproj", "{69750931-67A5-4E0A-9DCD-877DB1439E37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.FileOperations.IntegrationTests", "Tests\AdvancedCompressionMethods.FileOperations.IntegrationTests\AdvancedCompressionMethods.FileOperations.IntegrationTests.csproj", "{69750931-67A5-4E0A-9DCD-877DB1439E37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.Tests.Common", "AdvancedCompressionMethods.Tests.Common\AdvancedCompressionMethods.Tests.Common.csproj", "{56680906-E620-4AB3-94E5-5FAE18AA4A8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.Tests.Common", "Tests\AdvancedCompressionMethods.Tests.Common\AdvancedCompressionMethods.Tests.Common.csproj", "{56680906-E620-4AB3-94E5-5FAE18AA4A8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.ArithmeticCoding", "AdvancedCompressionMethods.ArithmeticCoding\AdvancedCompressionMethods.ArithmeticCoding.csproj", "{F5346B13-34E3-4408-8561-B31D90F90D8F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.DI", "AdvancedCompressionMethods.DI\AdvancedCompressionMethods.DI.csproj", "{3E2372A7-5378-4C33-B36A-0CD6D090F8C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests", "AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests\AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests.csproj", "{33ED352F-736F-4FA2-A9AF-8F228DAF5051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests", "Tests\AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests\AdvancedCompressionMethods.ArithmeticCoding.IntegrationTests.csproj", "{33ED352F-736F-4FA2-A9AF-8F228DAF5051}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{B2D642F1-EBCC-42C3-AAED-E5454A082846}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.FileOperations.Benchmark", "AdvancedCompressionMethods.FileOperations.Benchmark\AdvancedCompressionMethods.FileOperations.Benchmark.csproj", "{504640E0-96B3-47F7-ACA2-F932A317692A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.FileOperations.Benchmark", "Benchmarks\AdvancedCompressionMethods.FileOperations.Benchmark\AdvancedCompressionMethods.FileOperations.Benchmark.csproj", "{504640E0-96B3-47F7-ACA2-F932A317692A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding", "AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj", "{60359E4D-9655-4E59-A883-B27F80882178}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests", "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests.csproj", "{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests", "Tests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.IntegrationTests.csproj", "{7CEC7889-B37A-43D1-BA85-D54D68E9C3DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests", "AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests.csproj", "{694154B6-6397-47B7-A637-9A389621931C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests", "Tests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests\AdvancedCompressionMethods.NearLosslessPredictiveCoding.UnitTests.csproj", "{694154B6-6397-47B7-A637-9A389621931C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.WaveletCoding", "AdvancedCompressionMethods.WaveletCoding\AdvancedCompressionMethods.WaveletCoding.csproj", "{3631BAF0-27E7-43B2-AD8E-3A0016DE4565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.WaveletCoding.UnitTests", "AdvancedCompressionMethods.WaveletCoding.UnitTests\AdvancedCompressionMethods.WaveletCoding.UnitTests.csproj", "{38C0F45D-11F2-4FD8-95BC-B5A55D9A48A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCompressionMethods.WaveletCoding.UnitTests", "Tests\AdvancedCompressionMethods.WaveletCoding.UnitTests\AdvancedCompressionMethods.WaveletCoding.UnitTests.csproj", "{38C0F45D-11F2-4FD8-95BC-B5A55D9A48A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

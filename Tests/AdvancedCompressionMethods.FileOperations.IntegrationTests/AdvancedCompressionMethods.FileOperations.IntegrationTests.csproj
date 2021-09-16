@@ -14,18 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AdvancedCompressionMethods.DI\AdvancedCompressionMethods.DI.csproj" />
-    <ProjectReference Include="..\AdvancedCompressionMethods.NearLosslessPredictiveCoding\AdvancedCompressionMethods.NearLosslessPredictiveCoding.csproj" />
+    <ProjectReference Include="..\..\AdvancedCompressionMethods.DI\AdvancedCompressionMethods.DI.csproj" />
+    <ProjectReference Include="..\..\AdvancedCompressionMethods.FileOperations\AdvancedCompressionMethods.FileOperations.csproj" />
     <ProjectReference Include="..\AdvancedCompressionMethods.Tests.Common\AdvancedCompressionMethods.Tests.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Images\Lenna256an.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Peppers256an.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
